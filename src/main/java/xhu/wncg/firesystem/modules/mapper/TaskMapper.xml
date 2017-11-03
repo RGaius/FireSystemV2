@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xhu.wncg.firesystem.modules.mapper.TaskMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="xhu.wncg.firesystem.modules.pojo.Task" id="taskMap">
+        <result property="taskId" column="task_id"/>
+        <result property="unitId" column="unit_id"/>
+        <result property="taskTime" column="task_time"/>
+        <result property="startDate" column="start_date"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.Task">
+		select * from t_task where task_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.Task">
+		select * from t_task
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by task_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_task 
+	</select>
+	 
+	<insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.Task" useGeneratedKeys="true" keyProperty="taskId">
+		insert into t_task
+		(
+			`unit_id`, 
+			`task_time`, 
+			`start_date`, 
+			`create_date`, 
+			`update_date`
+		)
+		values
+		(
+			#{unitId}, 
+			#{taskTime}, 
+			#{startDate}, 
+			#{createDate}, 
+			#{updateDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.Task">
+		update t_task 
+		<set>
+			<if test="unitId != null">`unit_id` = #{unitId}, </if>
+			<if test="taskTime != null">`task_time` = #{taskTime}, </if>
+			<if test="startDate != null">`start_date` = #{startDate}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}</if>
+		</set>
+		where task_id = #{taskId}
+	</update>
+	
+	<delete id="delete">
+		delete from t_task where task_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_task where task_id in 
+		<foreach item="taskId" collection="array" open="(" separator="," close=")">
+			#{taskId}
+		</foreach>
+	</delete>
+
+</mapper>

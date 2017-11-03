@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xhu.wncg.firesystem.modules.mapper.UnitMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="xhu.wncg.firesystem.modules.pojo.Unit" id="unitMap">
+        <result property="unitId" column="unit_id"/>
+        <result property="policeStationId" column="police_station_id"/>
+        <result property="unitName" column="unit_name"/>
+        <result property="master" column="master"/>
+        <result property="address" column="address"/>
+        <result property="unitProperty" column="unit_property"/>
+        <result property="area" column="area"/>
+        <result property="floors" column="floors"/>
+        <result property="height" column="height"/>
+        <result property="status" column="status"/>
+        <result property="checkType" column="check_type"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+    <select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.Unit">
+		select * from t_unit where unit_id = #{value}
+	</select>
+
+    <select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.Unit">
+        select * from t_unit
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by unit_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+		select count(*) from t_unit 
+	</select>
+
+    <insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.Unit" useGeneratedKeys="true"
+            keyProperty="unitId">
+		insert into t_unit
+		(
+			`police_station_id`, 
+			`unit_name`, 
+			`master`, 
+			`address`, 
+			`unit_property`, 
+			`area`, 
+			`floors`, 
+			`height`, 
+			`status`, 
+			`check_type`, 
+			`create_date`
+		)
+		values
+		(
+			#{policeStationId}, 
+			#{unitName}, 
+			#{master}, 
+			#{address}, 
+			#{unitProperty}, 
+			#{area}, 
+			#{floors}, 
+			#{height}, 
+			#{status}, 
+			#{checkType}, 
+			#{createDate}
+		)
+	</insert>
+
+    <update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.Unit">
+        update t_unit
+        <set>
+            <if test="policeStationId != null">`police_station_id` = #{policeStationId},</if>
+            <if test="unitName != null">`unit_name` = #{unitName},</if>
+            <if test="master != null">`master` = #{master},</if>
+            <if test="address != null">`address` = #{address},</if>
+            <if test="unitProperty != null">`unit_property` = #{unitProperty},</if>
+            <if test="area != null">`area` = #{area},</if>
+            <if test="floors != null">`floors` = #{floors},</if>
+            <if test="height != null">`height` = #{height},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="checkType != null">`check_type` = #{checkType},</if>
+            <if test="createDate != null">`create_date` = #{createDate}</if>
+        </set>
+        where unit_id = #{unitId}
+    </update>
+
+    <delete id="delete">
+		delete from t_unit where unit_id = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from t_unit where unit_id in
+        <foreach item="unitId" collection="array" open="(" separator="," close=")">
+            #{unitId}
+        </foreach>
+    </delete>
+
+    <!--自定义-->
+    <select id="count" resultType="xhu.wncg.firesystem.modules.controller.vo.UnitVO" parameterType="java.lang.Integer">
+        SELECT ifnull(unit_property,'未知') AS property, count(unit_property) AS number FROM t_unit
+        <where>
+            <if test="policeStationId != null">
+                police_station_id = #{policeStationId}
+            </if>
+        </where>
+        GROUP BY property
+    </select>
+
+</mapper>

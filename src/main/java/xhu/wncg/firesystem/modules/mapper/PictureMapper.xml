@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xhu.wncg.firesystem.modules.mapper.PictureMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="xhu.wncg.firesystem.modules.pojo.Picture" id="pictureMap">
+        <result property="pictureId" column="picture_id"/>
+        <result property="dailyTableId" column="daily_table_id"/>
+        <result property="pictureType" column="picture_type"/>
+        <result property="pictureUrl" column="picture_url"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.Picture">
+		select * from t_picture where picture_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.Picture">
+		select * from t_picture
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by picture_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_picture 
+	</select>
+	 
+	<insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.Picture" useGeneratedKeys="true" keyProperty="pictureId">
+		insert into t_picture
+		(
+			`daily_table_id`, 
+			`picture_type`, 
+			`picture_url`, 
+			`create_date`
+		)
+		values
+		(
+			#{dailyTableId}, 
+			#{pictureType}, 
+			#{pictureUrl}, 
+			#{createDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.Picture">
+		update t_picture 
+		<set>
+			<if test="dailyTableId != null">`daily_table_id` = #{dailyTableId}, </if>
+			<if test="pictureType != null">`picture_type` = #{pictureType}, </if>
+			<if test="pictureUrl != null">`picture_url` = #{pictureUrl}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}</if>
+		</set>
+		where picture_id = #{pictureId}
+	</update>
+	
+	<delete id="delete">
+		delete from t_picture where picture_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_picture where picture_id in 
+		<foreach item="pictureId" collection="array" open="(" separator="," close=")">
+			#{pictureId}
+		</foreach>
+	</delete>
+
+</mapper>
