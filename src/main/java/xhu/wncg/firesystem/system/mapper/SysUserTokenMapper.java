@@ -1,6 +1,7 @@
 package xhu.wncg.firesystem.system.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import xhu.wncg.common.mapper.BaseMapper;
 import xhu.wncg.firesystem.system.pojo.SysUserToken;
 
 /**
@@ -8,23 +9,18 @@ import xhu.wncg.firesystem.system.pojo.SysUserToken;
  * @version 2017/11/2.
  */
 @Mapper
-public interface SysUserTokenMapper {
+public interface SysUserTokenMapper extends BaseMapper<SysUserToken, SysUserToken> {
     /**
      * 通过用户id获取token
+     *
      * @param userId
      * @return
      */
     SysUserToken queryByUserId(Long userId);
 
     /**
-     * 保存Token
      * @param token
+     * @return
      */
-    void save(SysUserToken token);
-
-    /**
-     * 更新token
-     * @param token
-     */
-    void update(SysUserToken token);
+    SysUserToken queryByToken(String token);
 }

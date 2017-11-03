@@ -35,6 +35,7 @@ public class SysUserController extends AbstractController {
 
     /**
      * 获取用户列表
+     *
      * @param params
      * @return
      */
@@ -42,7 +43,7 @@ public class SysUserController extends AbstractController {
     @RequiresPermissions("sys:user:list")
     public Fire list(@RequestParam Map<String, Object> params) {
         //只有超级管理员，才能查看所有管理员列表
-        if(getUserId() != Constant.SUPER_ADMIN){
+        if (getUserId() != Constant.SUPER_ADMIN) {
             params.put("createUserId", getUserId());
         }
 
@@ -57,22 +58,24 @@ public class SysUserController extends AbstractController {
 
     /**
      * 获取登录用户信息
+     *
      * @return
      */
-    @RequestMapping("/info")
-    public Fire info(){
+    @GetMapping("/info")
+    public Fire info() {
         return Fire.ok().put("user", getUser());
     }
 
     /**
      * 修改登录密码
-     * @param password 密码
+     *
+     * @param password    密码
      * @param newPassword 新密码
      * @return
      */
     @SystemLog("修改密码")
-    @RequestMapping("/password")
-    public Fire password(String password, String newPassword){
+    @PutMapping("/password")
+    public Fire password(String password, String newPassword) {
         Assert.isBlank(newPassword, "新密码不为能空");
 
         //sha256加密
@@ -82,7 +85,7 @@ public class SysUserController extends AbstractController {
 
         //更新密码
         int count = sysUserService.updatePassword(getUserId(), password, newPassword);
-        if(count == 0){
+        if (count == 0) {
             return Fire.error("原密码不正确");
         }
 
@@ -91,12 +94,13 @@ public class SysUserController extends AbstractController {
 
     /**
      * 通过用户id获取信息
+     *
      * @param userId 用户id
      * @return object
      */
-    @RequestMapping("/info/{userId}")
+    @GetMapping("/info/{userId}")
     @RequiresPermissions("sys:user:info")
-    public Fire info(@PathVariable("userId") Long userId){
+    public Fire info(@PathVariable("userId") Long userId) {
         SysUser user = sysUserService.queryObject(userId);
 
         //获取用户所属的角色列表
@@ -108,13 +112,14 @@ public class SysUserController extends AbstractController {
 
     /**
      * 保存用户
+     *
      * @param user
      * @return
      */
     @SystemLog("保存用户")
-    @RequestMapping("/save")
+    @PostMapping("/save")
     @RequiresPermissions("sys:user:save")
-    public Fire save(@RequestBody SysUser user){
+    public Fire save(@RequestBody SysUser user) {
         ValidatorUtils.validateEntity(user, AddGroup.class);
 
         user.setCreateUserId(getUserId());
@@ -125,13 +130,14 @@ public class SysUserController extends AbstractController {
 
     /**
      * 修改用户信息
+     *
      * @param user
      * @return
      */
     @SystemLog("修改用户")
-    @RequestMapping("/update")
+    @PutMapping("/update")
     @RequiresPermissions("sys:user:update")
-    public Fire update(@RequestBody SysUser user){
+    public Fire update(@RequestBody SysUser user) {
         ValidatorUtils.validateEntity(user, UpdateGroup.class);
 
         user.setCreateUserId(getUserId());
@@ -142,18 +148,19 @@ public class SysUserController extends AbstractController {
 
     /**
      * 删除用户
+     *
      * @param userIds
      * @return
      */
     @SystemLog("删除用户")
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     @RequiresPermissions("sys:user:delete")
-    public Fire delete(@RequestBody Long[] userIds){
-        if(ArrayUtils.contains(userIds, 1L)){
+    public Fire delete(@RequestBody Long[] userIds) {
+        if (ArrayUtils.contains(userIds, 1L)) {
             return Fire.error("系统管理员不能删除");
         }
 
-        if(ArrayUtils.contains(userIds, getUserId())){
+        if (ArrayUtils.contains(userIds, getUserId())) {
             return Fire.error("当前用户不能删除");
         }
 

@@ -29,12 +29,12 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
     }
 
     @Override
-    public void save(SysUserToken token){
+    public void save(SysUserToken token) {
         sysUserTokenMapper.save(token);
     }
 
     @Override
-    public void update(SysUserToken token){
+    public void update(SysUserToken token) {
         sysUserTokenMapper.update(token);
     }
 
@@ -49,7 +49,7 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
         Date expireTime = new Date(now.getTime() + EXPIRE * 1000);
 
         SysUserToken tokenEntity = queryByUserId(userId);
-        if(tokenEntity == null){
+        if (tokenEntity == null) {
             tokenEntity = new SysUserToken();
             tokenEntity.setUserId(userId);
             tokenEntity.setToken(token);
@@ -58,7 +58,7 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
 
             //保存token
             save(tokenEntity);
-        }else{
+        } else {
             tokenEntity.setToken(token);
             tokenEntity.setUpdateTime(now);
             tokenEntity.setExpireTime(expireTime);

@@ -23,6 +23,12 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserRoleService sysUserRoleService;
     @Autowired
     private SysRoleService sysRoleService;
+
+    @Override
+    public List<Long> queryAllMenuId(Long userId) {
+        return null;
+    }
+
     @Override
     public SysUser queryByUsername(String username) {
         return sysUserMapper.queryByUsername(username);

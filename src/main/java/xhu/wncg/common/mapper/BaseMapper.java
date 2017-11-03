@@ -17,6 +17,12 @@ public interface BaseMapper<T, K> {
     void save(T k);
 
     /**
+     * 保存
+     * @param map
+     */
+    void save(Map<String,Object> map);
+
+    /**
      * 批量保存
      * @param list
      */
@@ -30,7 +36,7 @@ public interface BaseMapper<T, K> {
     int update(T t);
 
     /**
-     * 更新
+     * 批量更新
      * @param list
      * @return
      */

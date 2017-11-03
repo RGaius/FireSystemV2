@@ -9,6 +9,7 @@ import java.util.List;
 public interface SysUserRoleService {
     /**
      * 查询用户权限
+     *
      * @param userId 用户id
      * @return
      */

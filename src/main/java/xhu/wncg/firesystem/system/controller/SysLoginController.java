@@ -36,6 +36,7 @@ public class SysLoginController extends AbstractController {
 
     /**
      * 获取验证码
+     *
      * @param response
      * @throws IOException
      */
@@ -45,7 +46,7 @@ public class SysLoginController extends AbstractController {
         response.setContentType("image/jpeg");
 
         //生成文字验证码
-        String  text = producer.createText();
+        String text = producer.createText();
 
         //生成图片验证码
         BufferedImage image = producer.createImage(text);
@@ -61,9 +62,10 @@ public class SysLoginController extends AbstractController {
 
     /**
      * 系统用户登录
+     *
      * @param username 用户名
      * @param password 密码
-     * @param captcha 验证码
+     * @param captcha  验证码
      * @return token
      */
     @PostMapping("/sys/login")
@@ -73,13 +75,13 @@ public class SysLoginController extends AbstractController {
             return Fire.error("验证码不正确！");
         }
         //用户信息
-        SysUser user= sysUserService.queryByUsername(username);
+        SysUser user = sysUserService.queryByUsername(username);
         if (user == null || user.getPassword().equals(new Sha256Hash(password, user.getSalt()).toHex())) {
             return Fire.error("账号或密码不正确");
         }
 
         //账号锁定
-        if(user.getStatus() == 0){
+        if (user.getStatus() == 0) {
             return Fire.error("账号已被锁定,请联系管理员");
         }
 
@@ -89,10 +91,11 @@ public class SysLoginController extends AbstractController {
 
     /**
      * 退出登录
+     *
      * @return
      */
     @PostMapping("/sys/logout")
-    public Fire logout(){
+    public Fire logout() {
         sysUserTokenService.logout(getUserId());
         return Fire.ok();
     }
