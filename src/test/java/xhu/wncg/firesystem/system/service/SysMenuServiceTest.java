@@ -10,6 +10,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import xhu.wncg.FireSystemApplication;
 import xhu.wncg.firesystem.system.pojo.SysMenu;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -36,8 +38,16 @@ public class SysMenuServiceTest {
     public void queryNotButtonList() throws Exception {
     }
 
+    /**
+     * 获取该用户下所有菜单
+     * @throws Exception
+     */
     @Test
     public void getUserMenuList() throws Exception {
+        List<SysMenu> list = sysMenuService.getUserMenuList(1L);
+        for (SysMenu menu : list) {
+            System.out.println(menu.toString());
+        }
     }
 
     @Test
@@ -78,8 +88,14 @@ public class SysMenuServiceTest {
         sysMenuService.update(menu);
     }
 
+    /**
+     * 批量删除
+     * @throws Exception
+     */
     @Test
     public void deleteBatch() throws Exception {
+        Long[] idList = {49L, 50L};
+        sysMenuService.deleteBatch(idList);
     }
 
     @Test

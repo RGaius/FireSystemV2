@@ -10,37 +10,37 @@ window.T = {};
 // 使用示例
 // location.href = http://localhost/index.html?id=123
 // T.p('id') --> 123;
-var url = function(name) {
-	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-	var r = window.location.search.substr(1).match(reg);
-	if(r!=null)return  unescape(r[2]); return null;
+var url = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
 };
 T.p = url;
 
 //请求前缀
-//var baseURL = "http://www.juziku.com/";
 //var baseURL = "/renren-fast/";
 var baseURL = "/";
 
 //登录token
 var token = localStorage.getItem("token");
-if(token == 'null'){
+if (token == 'null') {
     parent.location.href = baseURL + 'login.html';
 }
 
 //jquery全局配置
 $.ajaxSetup({
-	dataType: "json",
-	cache: false,
+    dataType: "json",
+    cache: false,
     headers: {
         "token": token
     },
     xhrFields: {
-	    withCredentials: true
+        withCredentials: true
     },
-    complete: function(xhr) {
+    complete: function (xhr) {
         //token过期，则跳转到登录页面
-        if(xhr.responseJSON.code == 401){
+        if (xhr.status === 401) {
             parent.location.href = baseURL + 'login.html';
         }
     }
@@ -48,7 +48,7 @@ $.ajaxSetup({
 
 //jqgrid全局配置
 $.extend($.jgrid.defaults, {
-    ajaxGridOptions : {
+    ajaxGridOptions: {
         headers: {
             "token": token
         }
@@ -65,40 +65,40 @@ function hasPermission(permission) {
 }
 
 //重写alert
-window.alert = function(msg, callback){
-	parent.layer.alert(msg, function(index){
-		parent.layer.close(index);
-		if(typeof(callback) === "function"){
-			callback("ok");
-		}
-	});
+window.alert = function (msg, callback) {
+    parent.layer.alert(msg, function (index) {
+        parent.layer.close(index);
+        if (typeof(callback) === "function") {
+            callback("ok");
+        }
+    });
 }
 
 //重写confirm式样框
-window.confirm = function(msg, callback){
-	parent.layer.confirm(msg, {btn: ['确定','取消']},
-	function(){//确定事件
-		if(typeof(callback) === "function"){
-			callback("ok");
-		}
-	});
+window.confirm = function (msg, callback) {
+    parent.layer.confirm(msg, {btn: ['确定', '取消']},
+        function () {//确定事件
+            if (typeof(callback) === "function") {
+                callback("ok");
+            }
+        });
 }
 
 //选择一条记录
 function getSelectedRow() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");
-    if(!rowKey){
-    	alert("请选择一条记录");
-    	return ;
+    if (!rowKey) {
+        alert("请选择一条记录");
+        return;
     }
-    
+
     var selectedIDs = grid.getGridParam("selarrrow");
-    if(selectedIDs.length > 1){
-    	alert("只能选择一条记录");
-    	return ;
+    if (selectedIDs.length > 1) {
+        alert("只能选择一条记录");
+        return;
     }
-    
+
     return selectedIDs[0];
 }
 
@@ -106,11 +106,11 @@ function getSelectedRow() {
 function getSelectedRows() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");
-    if(!rowKey){
-    	alert("请选择一条记录");
-    	return ;
+    if (!rowKey) {
+        alert("请选择一条记录");
+        return;
     }
-    
+
     return grid.getGridParam("selarrrow");
 }
 
@@ -124,21 +124,21 @@ function isBlank(value) {
  * @param startDate
  * @param endDate
  */
-function initDate(startDate,endDate) {
+function initDate(startDate, endDate) {
 
     $('#startDate').datetimepicker({
-        format:'yyyy-mm-dd',
-        minView:'month',
+        format: 'yyyy-mm-dd',
+        minView: 'month',
         language: 'zh-CN',
-        autoclose:true,
-        todayBtn:true
+        autoclose: true,
+        todayBtn: true
     });
 
     $('#endDate').datetimepicker({
-        format:'yyyy-mm-dd',
-        minView:'month',
+        format: 'yyyy-mm-dd',
+        minView: 'month',
         language: 'zh-CN',
-        autoclose:true,
-        todayBtn:true
+        autoclose: true,
+        todayBtn: true
     });
 }

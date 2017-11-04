@@ -19,6 +19,7 @@ public interface SysUserTokenMapper extends BaseMapper<SysUserToken, SysUserToke
     SysUserToken queryByUserId(Long userId);
 
     /**
+     * 查询用户token
      * @param token
      * @return
      */

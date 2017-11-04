@@ -55,7 +55,7 @@ public class SysLoginController extends AbstractController {
 
 
         ServletOutputStream outputStream = response.getOutputStream();
-        ImageIO.write(image, "ipg", outputStream);
+        ImageIO.write(image, "jpg", outputStream);
         IOUtils.closeQuietly(outputStream);
 
     }
@@ -76,7 +76,8 @@ public class SysLoginController extends AbstractController {
         }
         //用户信息
         SysUser user = sysUserService.queryByUsername(username);
-        if (user == null || user.getPassword().equals(new Sha256Hash(password, user.getSalt()).toHex())) {
+
+        if (user == null || !user.getPassword().equals(new Sha256Hash(password, user.getSalt()).toHex())) {
             return Fire.error("账号或密码不正确");
         }
 

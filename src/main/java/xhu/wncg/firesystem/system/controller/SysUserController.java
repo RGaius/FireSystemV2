@@ -26,7 +26,7 @@ import java.util.Map;
  * @version 2017/11/3.
  */
 @RestController
-@RequestMapping("sys/user")
+@RequestMapping("/sys/user")
 public class SysUserController extends AbstractController {
     @Autowired
     private SysUserService sysUserService;

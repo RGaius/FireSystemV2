@@ -20,7 +20,9 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
     @Autowired
     private SysUserTokenMapper sysUserTokenMapper;
 
-    //24小时后过期
+    /**
+     * 24小时后过期
+     */
     private final static int EXPIRE = 3600 * 24;
 
     @Override
@@ -48,6 +50,7 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
         //过期时间
         Date expireTime = new Date(now.getTime() + EXPIRE * 1000);
 
+        //判断是否生成过token
         SysUserToken tokenEntity = queryByUserId(userId);
         if (tokenEntity == null) {
             tokenEntity = new SysUserToken();
