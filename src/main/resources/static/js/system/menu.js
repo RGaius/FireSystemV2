@@ -16,7 +16,6 @@ var ztree;
 var vm = new Vue({
     el:'#rrapp',
     data:{
-        showList: true,
         title: null,
         menu:{
             parentName:null,
@@ -37,10 +36,20 @@ var vm = new Vue({
             })
         },
         add: function(){
-            vm.showList = false;
-            vm.title = "新增";
             vm.menu = {parentName:null,parentId:0,type:1,orderNum:0};
             vm.getMenu();
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-molv',
+                title: '新增',
+                area: ['600px', '550px'],
+                shadeClose: false,
+                content: jQuery("#menuInfo"),
+                btn: ['添加','取消'],
+                btn1: function(){
+                    vm.saveOrUpdate(index);
+                }
+            });
         },
         update: function () {
             var menuId = getMenuId();

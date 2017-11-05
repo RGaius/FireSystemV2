@@ -39,7 +39,7 @@ public class SysUserController extends AbstractController {
      * @param params
      * @return
      */
-    @PostMapping("/list")
+    @GetMapping("/list")
     @RequiresPermissions("sys:user:list")
     public Fire list(@RequestParam Map<String, Object> params) {
         //只有超级管理员，才能查看所有管理员列表

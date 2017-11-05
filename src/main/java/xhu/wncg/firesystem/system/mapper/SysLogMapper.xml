@@ -3,33 +3,33 @@
 
 <mapper namespace="xhu.wncg.firesystem.system.mapper.SysLogMapper">
 
-	<select id="queryObject" resultType="xhu.wncg.firesystem.system.pojo.SysLog">
+    <select id="queryObject" resultType="xhu.wncg.firesystem.system.pojo.SysLog">
 		select * from sys_log where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="xhu.wncg.firesystem.system.pojo.SysLog">
-		select * from sys_log 
-		<where>
-			<if test="key != null and key.trim() != ''">
-				`username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
-			</if>
-		</where>
-		order by id desc 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from sys_log 
-		<where>
-			<if test="key != null and key.trim() != ''">
-				`username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
-			</if>
-		</where>
-	</select>
-	 
-	<insert id="save" parameterType="xhu.wncg.firesystem.system.pojo.SysLog" useGeneratedKeys="true" keyProperty="id">
+    <select id="queryList" resultType="xhu.wncg.firesystem.system.pojo.SysLog">
+        select * from sys_log
+        <where>
+            <if test="key != null and key.trim() != ''">
+                `username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
+            </if>
+        </where>
+        order by id desc
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from sys_log
+        <where>
+            <if test="key != null and key.trim() != ''">
+                `username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="xhu.wncg.firesystem.system.pojo.SysLog" useGeneratedKeys="true" keyProperty="id">
 		insert into sys_log
 		(
 			`username`, 
@@ -51,16 +51,16 @@
 			#{createDate}
 		)
 	</insert>
-	
-	<delete id="delete">
+
+    <delete id="delete">
 		delete from sys_log where id = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from sys_log where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from sys_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

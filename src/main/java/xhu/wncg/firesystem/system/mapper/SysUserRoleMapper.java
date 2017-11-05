@@ -1,6 +1,8 @@
 package xhu.wncg.firesystem.system.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import xhu.wncg.common.mapper.BaseMapper;
+import xhu.wncg.firesystem.system.pojo.SysUserRole;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ import java.util.List;
  * @date 2016年9月18日 上午9:34:46
  */
 @Mapper
-public interface SysUserRoleMapper {
+public interface SysUserRoleMapper extends BaseMapper<SysUserRole, SysUserRole> {
 
     /**
      * 根据用户ID，获取角色ID列表

@@ -14,4 +14,11 @@ public interface SysUserRoleService {
      * @return
      */
     List<Long> queryRoleIdList(Long userId);
+
+    /**
+     *
+     * @param userId
+     * @param roleIdList
+     */
+    void saveOrUpdate(Long userId, List<Long> roleIdList);
 }
