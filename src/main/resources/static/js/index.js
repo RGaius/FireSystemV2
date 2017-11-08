@@ -66,7 +66,7 @@ var vm = new Vue({
                 btn1: function (index) {
                     var data = "password=" + vm.password + "&newPassword=" + vm.newPassword;
                     $.ajax({
-                        type: "POST",
+                        type: "PUT",
                         url: baseURL + "sys/user/password",
                         data: data,
                         dataType: "json",

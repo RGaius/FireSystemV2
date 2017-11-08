@@ -71,7 +71,7 @@ public class SysUserController extends AbstractController {
      *
      * @param password    密码
      * @param newPassword 新密码
-     * @return
+     * @returnz
      */
     @SystemLog("修改密码")
     @PutMapping("/password")
