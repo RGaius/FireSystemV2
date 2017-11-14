@@ -114,4 +114,12 @@
         GROUP BY property
     </select>
 
+    <select id="queryCount" resultType="xhu.wncg.firesystem.modules.pojo.Unit" parameterType="java.lang.String">
+        SELECT * FROM t_unit WHERE unit_name LIKE '%#{countKeys}%'
+    </select>
+
+    <select id="queryById" resultType="xhu.wncg.firesystem.modules.pojo.Unit" parameterType="java.lang.Integer">
+        SELECT * FROM t_unit WHERE unit_id=#{countId}
+    </select>
+
 </mapper>

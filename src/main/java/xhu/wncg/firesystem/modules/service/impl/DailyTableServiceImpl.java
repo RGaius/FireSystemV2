@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import xhu.wncg.firesystem.modules.mapper.DailyTableMapper;
+import xhu.wncg.firesystem.modules.pojo.DailyTable;
 import xhu.wncg.firesystem.modules.service.DailyTableService;
 import xhu.wncg.firesystem.modules.controller.vo.DailyTableVO;
 import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
@@ -54,5 +55,14 @@ public class DailyTableServiceImpl implements DailyTableService {
 	public void deleteBatch(Integer[] dailyTableIds){
 		dailyTableMapper.deleteBatch(dailyTableIds);
 	}
-	
+
+	@Override
+	public List<DailyTable> countDaily(Integer countId){
+		return dailyTableMapper.countDaily(countId);
+	}
+
+	@Override
+	public DailyTableVO queryAll(Integer dailyTableId){
+		return dailyTableMapper.queryByDailyTableId(dailyTableId);
+	}
 }

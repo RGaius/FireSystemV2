@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import xhu.wncg.firesystem.modules.controller.vo.DailyTableVO;
 import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
+import xhu.wncg.firesystem.modules.pojo.DailyTable;
 import xhu.wncg.firesystem.modules.service.DailyTableService;
 import xhu.wncg.common.utils.PageUtils;
 import xhu.wncg.common.utils.Query;
 import xhu.wncg.common.utils.Fire;
+import xhu.wncg.firesystem.modules.service.PictureService;
+import xhu.wncg.firesystem.modules.service.UnitService;
 
 /**
  * 日常检查表
@@ -31,6 +34,8 @@ import xhu.wncg.common.utils.Fire;
 public class DailyTableController {
 	@Autowired
 	private DailyTableService dailyTableService;
+	private PictureService pictureService;
+	private UnitService unitService;
 	
 	/**
 	 * 列表
@@ -102,6 +107,26 @@ public class DailyTableController {
 		dailyTableService.deleteBatch(dailyTableIds);
 		
 		return Fire.ok();
+	}
+
+	/**
+	 * 通过场所查询调查表
+	 */
+	@GetMapping("/countDaily")
+	public Fire countDaily(Integer countId){
+		List<DailyTable> dailyTables=dailyTableService.countDaily(countId);
+		return Fire.ok().put("data",dailyTables);
+	}
+
+	/**
+	 * 通过日常检查id查询所有信息
+	 */
+	@GetMapping("/queryAll")
+	public Fire queryAll(Integer dailyTableId){
+		DailyTableVO dailyTableVO=dailyTableService.queryAll(dailyTableId);
+		dailyTableVO.setPicture(pictureService.queryByDailyTableId(dailyTableId));
+		dailyTableVO.setUnit(unitService.queryById(dailyTableVO.getUnitId()));
+		return Fire.ok().put("data",dailyTableVO);
 	}
 	
 }

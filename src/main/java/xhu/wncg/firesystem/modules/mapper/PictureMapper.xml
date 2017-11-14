@@ -74,4 +74,8 @@
 		</foreach>
 	</delete>
 
+	<select id="queryByDailyTableId" resultType="xhu.wncg.firesystem.modules.pojo.Picture" parameterType="java.lang.Integer">
+		SELECT * FROM t_picture WHERE daily_table_id=#{dailyTableId}
+	</select>
+
 </mapper>

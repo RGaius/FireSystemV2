@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import xhu.wncg.firesystem.modules.controller.vo.UnitVO;
 import xhu.wncg.firesystem.modules.controller.qo.UnitQO;
+import xhu.wncg.firesystem.modules.pojo.Unit;
 import xhu.wncg.firesystem.modules.service.UnitService;
 import xhu.wncg.common.utils.PageUtils;
 import xhu.wncg.common.utils.Query;
@@ -114,5 +115,17 @@ public class UnitController {
 		List<UnitVO> countList = unitService.count(policeStationId);
 		return Fire.ok().put("data", countList);
 	}
+
+	/**
+	 * 模糊查询场所
+	 * @param countKeys 关键字
+	 * @return object
+	 */
+	@GetMapping("/queryCount")
+	public Fire queryCount(String countKeys){
+		List<Unit> countList=unitService.queryCount(countKeys);
+		return Fire.ok().put("data",countList);
+	}
+
 	
 }

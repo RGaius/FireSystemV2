@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xhu.wncg.firesystem.modules.mapper.PoliceMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="xhu.wncg.firesystem.modules.pojo.Police" id="policeMap">
+        <result property="policeId" column="police_id"/>
+        <result property="policeStationId" column="police_station_id"/>
+        <result property="moblie" column="moblie"/>
+        <result property="relName" column="rel_name"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.Police">
+		select * from t_police where police_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.Police">
+		select * from t_police
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by police_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_police 
+	</select>
+	 
+	<insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.Police">
+		insert into t_police
+		(
+			`police_id`, 
+			`police_station_id`, 
+			`moblie`, 
+			`rel_name`, 
+			`create_date`
+		)
+		values
+		(
+			#{policeId}, 
+			#{policeStationId}, 
+			#{moblie}, 
+			#{relName}, 
+			#{createDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.Police">
+		update t_police 
+		<set>
+			<if test="policeStationId != null">`police_station_id` = #{policeStationId}, </if>
+			<if test="moblie != null">`moblie` = #{moblie}, </if>
+			<if test="relName != null">`rel_name` = #{relName}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}</if>
+		</set>
+		where police_id = #{policeId}
+	</update>
+	
+	<delete id="delete">
+		delete from t_police where police_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_police where police_id in 
+		<foreach item="policeId" collection="array" open="(" separator="," close=")">
+			#{policeId}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -90,4 +90,12 @@
 		</foreach>
 	</delete>
 
+	<!--自定义-->
+	<select id="countDaily" resultType="xhu.wncg.firesystem.modules.pojo.DailyTable" parameterType="java.lang.Integer">
+		SELECT * FROM t_daily_table WHERE unit_id=#{countId}
+	</select>
+
+	<select id="queryByDailyTableId" resultType="xhu.wncg.firesystem.modules.controller.vo.DailyTableVO" parameterType="java.lang.Integer">
+		SELECT * FROM t_daily_table WHERE daily_table_id=#{dailyTableId}
+ 	</select>
 </mapper>

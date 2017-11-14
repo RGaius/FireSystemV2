@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import xhu.wncg.firesystem.modules.mapper.UnitMapper;
+import xhu.wncg.firesystem.modules.pojo.Unit;
 import xhu.wncg.firesystem.modules.service.UnitService;
 import xhu.wncg.firesystem.modules.controller.vo.UnitVO;
 import xhu.wncg.firesystem.modules.controller.qo.UnitQO;
@@ -58,5 +59,13 @@ public class UnitServiceImpl implements UnitService {
 	@Override
 	public List<UnitVO> count(Integer policeStationId) {
 		return unitMapper.count(policeStationId);
+	}
+	@Override
+	public  List<Unit> queryCount(String countKeys){
+		return unitMapper.queryCount(countKeys);
+	}
+	@Override
+	public Unit queryById(Integer countId){
+		return unitMapper.queryById(countId);
 	}
 }

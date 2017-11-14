@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import xhu.wncg.firesystem.modules.mapper.PictureMapper;
+import xhu.wncg.firesystem.modules.pojo.Picture;
 import xhu.wncg.firesystem.modules.service.PictureService;
 import xhu.wncg.firesystem.modules.controller.vo.PictureVO;
 import xhu.wncg.firesystem.modules.controller.qo.PictureQO;
@@ -54,5 +55,9 @@ public class PictureServiceImpl implements PictureService {
 	public void deleteBatch(Integer[] pictureIds){
 		pictureMapper.deleteBatch(pictureIds);
 	}
-	
+
+	@Override
+	public List<Picture> queryByDailyTableId(Integer dailyTableId){
+		return pictureMapper.queryByDailyTableId(dailyTableId);
+	}
 }
