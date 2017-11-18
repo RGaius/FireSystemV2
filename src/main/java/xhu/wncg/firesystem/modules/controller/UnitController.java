@@ -110,7 +110,6 @@ public class UnitController {
 	 * @return object
 	 */
 	@GetMapping("/count")
-	@RequiresPermissions("fire:unit:count")
 	public Fire count(Integer policeStationId){
 		List<UnitVO> countList = unitService.count(policeStationId);
 		return Fire.ok().put("data", countList);
