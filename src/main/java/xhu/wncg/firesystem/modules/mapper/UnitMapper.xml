@@ -105,7 +105,7 @@
 
     <!--自定义-->
     <select id="count" resultType="xhu.wncg.firesystem.modules.controller.vo.UnitVO" parameterType="java.lang.Integer">
-        SELECT ifnull(unit_property,'未知') AS property, count(unit_property) AS number FROM t_unit
+        SELECT unit_property AS property, count(unit_property) AS number FROM t_unit
         <where>
             <if test="policeStationId != null">
                 police_station_id = #{policeStationId}

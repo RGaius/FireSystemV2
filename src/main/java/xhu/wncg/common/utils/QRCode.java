@@ -6,6 +6,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import xhu.wncg.common.exception.FireException;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -28,6 +29,9 @@ public class QRCode {
      * @return 图片保存地址
      */
     public static String createQRCode(String imgPath, String content) throws WriterException, IOException {
+        if (imgPath == null || content == null) {
+            throw new FireException("参数不能为空！");
+        }
         //图像宽度
         int width = 200;
         //图像高度
@@ -39,6 +43,7 @@ public class QRCode {
         String fileName = UUID.randomUUID().toString().substring(0, 8) + "." + format;
 
         HashMap<EncodeHintType, Object> hints = new HashMap<>();
+        //设置二维码属性
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         //设置边框
         hints.put(EncodeHintType.MARGIN, 1);
