@@ -4,6 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import xhu.wncg.common.exception.FireException;
+import xhu.wncg.firesystem.modules.pojo.Unit;
 import xhu.wncg.firesystem.system.pojo.SysUser;
 
 /**
@@ -30,7 +31,6 @@ public class ShiroUtils {
 	public static Long getUserId() {
 		return getUserEntity().getUserId();
 	}
-	
 	public static void setSessionAttribute(Object key, Object value) {
 		getSession().setAttribute(key, value);
 	}

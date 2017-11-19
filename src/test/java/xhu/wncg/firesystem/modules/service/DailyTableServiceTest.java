@@ -8,35 +8,28 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import xhu.wncg.FireSystemApplication;
-import xhu.wncg.firesystem.modules.controller.vo.UnitVO;
-import xhu.wncg.firesystem.modules.pojo.Unit;
 
-import java.util.List;
+import static org.junit.Assert.*;
 
 /**
  * @author BZhao
- * @version 2017/11/3.
+ * @version 2017/11/14.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = FireSystemApplication.class)
 @WebAppConfiguration
 @ActiveProfiles("dev")
-public class UnitServiceTest {
+public class DailyTableServiceTest {
     @Autowired
-    private UnitService unitService;
+    private DailyTableService dailyTableService;
 
-    /**
-     * 场所统计
-     *
-     * @throws Exception
-     */
     @Test
-    public void count() throws Exception {
-        List<UnitVO> list = unitService.count(null);
-        for (UnitVO o : list) {
-            System.out.println(o.toString());
-        }
+    public void countDaily() throws Exception {
+        dailyTableService.countDaily(null);
+    }
 
+    @Test
+    public void queryAll() throws Exception {
     }
 
 }

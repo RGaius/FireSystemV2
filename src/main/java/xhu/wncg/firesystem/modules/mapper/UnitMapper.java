@@ -25,7 +25,7 @@ public interface UnitMapper extends BaseMapper<UnitQO, UnitVO> {
      * @param policeStationId 派出所id
      * @return list
      */
-    List<UnitVO> count(Integer policeStationId);
+    List<UnitVO> count(@Param("policeStationId") Integer policeStationId);
 
     /**
      * 模糊查询场所,按创建时间查询场所
