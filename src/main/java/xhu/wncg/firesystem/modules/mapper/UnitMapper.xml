@@ -114,8 +114,16 @@
         GROUP BY property
     </select>
 
-    <select id="queryCount" resultType="xhu.wncg.firesystem.modules.pojo.Unit" parameterType="java.lang.String">
-        SELECT * FROM t_unit WHERE unit_name LIKE '%#{countKeys}%'
+    <select id="queryCount" resultType="xhu.wncg.firesystem.modules.pojo.Unit">
+        SELECT * FROM t_unit
+         <where>
+             <if test="countKeys != null">
+             unit_name LIKE CONCAT('%',#{countKeys},'%')
+             </if>
+             <if test="startTime != null and endTime != null">
+                 create_date between #{startTime} and #{endTime}
+             </if>
+         </where>
     </select>
 
     <select id="queryById" resultType="xhu.wncg.firesystem.modules.pojo.Unit" parameterType="java.lang.Integer">

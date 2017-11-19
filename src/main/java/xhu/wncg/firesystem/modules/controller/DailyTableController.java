@@ -34,9 +34,7 @@ import xhu.wncg.firesystem.modules.service.UnitService;
 public class DailyTableController {
 	@Autowired
 	private DailyTableService dailyTableService;
-	private PictureService pictureService;
-	private UnitService unitService;
-	
+
 	/**
 	 * 列表
 	 * @param params
@@ -111,6 +109,8 @@ public class DailyTableController {
 
 	/**
 	 * 通过场所查询调查表
+	 * @param countId
+	 * @return Fire
 	 */
 	@GetMapping("/countDaily")
 	public Fire countDaily(Integer countId){
@@ -120,12 +120,12 @@ public class DailyTableController {
 
 	/**
 	 * 通过日常检查id查询所有信息
+	 * @param dailyTableId
+	 * @return Fire
 	 */
 	@GetMapping("/queryAll")
 	public Fire queryAll(Integer dailyTableId){
 		DailyTableVO dailyTableVO=dailyTableService.queryAll(dailyTableId);
-		dailyTableVO.setPicture(pictureService.queryByDailyTableId(dailyTableId));
-		dailyTableVO.setUnit(unitService.queryById(dailyTableVO.getUnitId()));
 		return Fire.ok().put("data",dailyTableVO);
 	}
 	

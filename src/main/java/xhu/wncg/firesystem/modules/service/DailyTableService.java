@@ -25,7 +25,7 @@ public interface DailyTableService extends BaseService<DailyTableQO, DailyTableV
 
     /**
      * 通过日常检查记录id查检查表及所有信息
-     *
+     * @param dailyTableId
      * @return DailyTableVo
      */
     DailyTableVO queryAll(Integer dailyTableId);

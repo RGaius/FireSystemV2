@@ -2,6 +2,7 @@ package xhu.wncg.firesystem.modules.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -117,13 +118,13 @@ public class UnitController {
 	}
 
 	/**
-	 * 模糊查询场所
-	 * @param countKeys 关键字
+	 * 模糊查询场所, 按创建时间查询场所
+	 * @param countKeys 关键字 startTime,endTime 起止时间
 	 * @return object
 	 */
 	@GetMapping("/queryCount")
-	public Fire queryCount(String countKeys){
-		List<Unit> countList=unitService.queryCount(countKeys);
+	public Fire queryCount(String countKeys, Date startTime,Date endTime){
+		List<Unit> countList=unitService.queryCount(countKeys,startTime,endTime);
 		return Fire.ok().put("data",countList);
 	}
 

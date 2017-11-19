@@ -1,8 +1,10 @@
 package xhu.wncg.firesystem.modules.service.impl;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -61,8 +63,8 @@ public class UnitServiceImpl implements UnitService {
 		return unitMapper.count(policeStationId);
 	}
 	@Override
-	public  List<Unit> queryCount(String countKeys){
-		return unitMapper.queryCount(countKeys);
+	public  List<Unit> queryCount(@Param("countKeys") String countKeys, @Param("startTime") Date startTime,@Param("endTime") Date endTime){
+		return unitMapper.queryCount(countKeys,startTime,endTime);
 	}
 	@Override
 	public Unit queryById(Integer countId){

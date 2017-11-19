@@ -11,6 +11,9 @@ import xhu.wncg.firesystem.modules.pojo.DailyTable;
 import xhu.wncg.firesystem.modules.service.DailyTableService;
 import xhu.wncg.firesystem.modules.controller.vo.DailyTableVO;
 import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
+import xhu.wncg.firesystem.modules.service.PictureService;
+import xhu.wncg.firesystem.modules.service.UnitService;
+
 /**
  * @author zhaobo
  * @email 15528330581@163.com
@@ -20,6 +23,10 @@ import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
 public class DailyTableServiceImpl implements DailyTableService {
 	@Autowired
 	private DailyTableMapper dailyTableMapper;
+	@Autowired
+	private PictureService pictureService;
+	@Autowired
+	private UnitService unitService;
 	
 	@Override
 	public DailyTableVO queryObject(Integer dailyTableId){
@@ -63,6 +70,10 @@ public class DailyTableServiceImpl implements DailyTableService {
 
 	@Override
 	public DailyTableVO queryAll(Integer dailyTableId){
-		return dailyTableMapper.queryByDailyTableId(dailyTableId);
+		DailyTableVO dailyTableVO;
+		dailyTableVO=dailyTableMapper.queryByDailyTableId(dailyTableId);
+		dailyTableVO.setPicture(pictureService.queryByDailyTableId(dailyTableId));
+		dailyTableVO.setUnit(unitService.queryById(dailyTableVO.getUnitId()));
+		return dailyTableVO;
 	}
 }

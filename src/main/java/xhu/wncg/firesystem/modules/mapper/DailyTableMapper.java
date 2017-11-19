@@ -19,14 +19,16 @@ import java.util.List;
 public interface DailyTableMapper extends BaseMapper<DailyTableQO, DailyTableVO> {
 
     /**
-     * 通过场所查询检查表
+     * 通过场所id查询该场所的检查记录
      * @param countId
      * @return list
      */
     List<DailyTable> countDaily(Integer countId);
 
     /**
-     * 通过日常检查表id查信息
+     * 通过日常检查表id查具体信息
+     * @param dailyTableId
+     * @return DailyTableVO
      */
     DailyTableVO queryByDailyTableId(Integer dailyTableId);
 }
