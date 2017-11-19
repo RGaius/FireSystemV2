@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import xhu.wncg.FireSystemApplication;
 import xhu.wncg.firesystem.modules.controller.vo.UnitVO;
+import xhu.wncg.firesystem.modules.pojo.Unit;
 
 import java.util.List;
 
@@ -26,12 +27,13 @@ public class UnitServiceTest {
 
     /**
      * 场所统计
+     *
      * @throws Exception
      */
     @Test
     public void count() throws Exception {
         List<UnitVO> list = unitService.count(null);
-        for (UnitVO o: list) {
+        for (UnitVO o : list) {
             System.out.println(o.toString());
         }
 

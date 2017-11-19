@@ -103,5 +103,14 @@ public class PoliceStationController {
 		
 		return Fire.ok();
 	}
-	
+
+	/**
+	 * 查询派出所数据
+	 * @return Fire
+	 */
+	@GetMapping("/listPoliceStation")
+	public Fire listPoliceStation(Map<String, Object> map){
+		List<PoliceStationVO> policeStationList = policeStationService.queryList(null);
+		return Fire.ok().put("data", policeStationList);
+	}
 }

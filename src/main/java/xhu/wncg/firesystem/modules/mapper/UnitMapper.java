@@ -1,5 +1,6 @@
 package xhu.wncg.firesystem.modules.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import xhu.wncg.firesystem.modules.controller.vo.UnitVO;
 import xhu.wncg.firesystem.modules.controller.qo.UnitQO;
 import xhu.wncg.common.mapper.BaseMapper;
@@ -23,7 +24,7 @@ public interface UnitMapper extends BaseMapper<UnitQO, UnitVO> {
      * @param policeStationId 派出所id
      * @return list
      */
-    List<UnitVO> count(Integer policeStationId);
+    List<UnitVO> count(@Param("policeStationId") Integer policeStationId);
 
     /**
      * 模糊查询场所
