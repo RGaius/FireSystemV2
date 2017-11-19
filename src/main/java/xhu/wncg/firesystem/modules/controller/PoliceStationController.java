@@ -2,6 +2,7 @@ package xhu.wncg.firesystem.modules.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -109,7 +110,7 @@ public class PoliceStationController {
 	 * @return Fire
 	 */
 	@GetMapping("/listPoliceStation")
-	public Fire listPoliceStation(Map<String, Object> map){
+	public Fire listPoliceStation(){
 		List<PoliceStationVO> policeStationList = policeStationService.queryList(null);
 		return Fire.ok().put("data", policeStationList);
 	}

@@ -5,6 +5,12 @@
     <title>角色管理</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="../../../plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="../../../css/main.css">
     <script src="../../../plugins/jquery/jquery.min.js"></script>
     <script src="../../../plugins/layer/layer.js"></script>
     <script src="../../../plugins/bootstrap/bootstrap.min.js"></script>
@@ -17,11 +23,12 @@
     <script src="../../../plugins/echarts/echarts.min.js"></script>
 </head>
 <body>
-<div id="listPoliceStation">
-    <select id="list_policeStation" name="list_policeStation"></select>
-    <div id="query">
-    <input type="button" value="查询" onclick="query" />
-</div>
+<div class="grid-btn">
+    <div id="listPoliceStation">
+        <select id="list_policeStation" name="list_policeStation" class="form-control"
+                style="width:250px;display:inline"></select>
+        <a id="query" class="btn btn btn-primary" @click="query"><i class="fa fa-search"></i>查询</a>
+    </div>
 </div>
 
 <div id="draw">
