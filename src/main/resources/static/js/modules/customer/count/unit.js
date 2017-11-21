@@ -1,10 +1,14 @@
-//加载函数实现默认项展示
+/**
+ * 加载函数实现默认项展示
+ */
 $(document).ready(function () {
     list();
     count();
 });
 
-//列出所有派出所
+/**
+ * 列出所有派出所
+ */
 function list() {
     $.ajax({
         url: baseURL + "fire/policestation/listPoliceStation",
@@ -13,18 +17,17 @@ function list() {
         type: "GET",
         dataType: "json",
         success: function (data) {
-            $("#list_policeStation").prepend("<option value='0'>请选择</option>");
-            $.each(data, function (key, values) {
-                $.each(values, function (key, values) {
-                    //两次遍历取出存放在{code:data{policeStationId:bunchId:policeStation}}}的值并赋给option
-                    $("#list_policeStation").append("<option value='" + values.policeStationId + "'>" + values.policeStation + "</option>");
-                })
+            $("#list_policeStation").prepend("<option value='0'>泸州市所有公安局</option>");
+            $.each(data.data, function (key, values) {
+                $("#list_policeStation").append("<option value='" + values.policeStationId + "'>" + values.policeStation + "</option>");
             })
         }
     });
 }
 
-//计算当前选中的value并处理赋给饼图
+/**
+ * 计算当前选中的value并处理赋给饼图
+ */
 function count() {
     //获取当前选中的警局id
     var policeStationId = $("#list_policeStation").val();
@@ -41,30 +44,32 @@ function count() {
             //定义两个数组存放获取的值
             var names = [];
             var nums = [];
-            $.each(data, function (key, values) {
-                $.each(values, function (key, values) {
-                    names.push(values.property);
-                    var obj = new Object();
-                    obj.name = values.property;
-                    obj.value = values.number;
-                    nums.push(obj);
-                });
+            $.each(data.data, function (key, values) {
+                names.push(values.property);
+                var obj = {};
+                obj.name = values.property;
+                obj.value = values.number;
+                nums.push(obj);
             });
             //调用画图
             draw(names, nums);
         },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        error: function () {
             alert("查询失败");
         }
     })
 }
 
-//画出饼图
+
+/**
+ * 画出饼图
+ * @param names
+ * @param nums
+ */
 function draw(names, nums) {
     var dom = document.getElementById("unitChart");
     var myChart = echarts.init(dom);//初始化饼图
-    var option = null;
-    option = {
+    var option = {
         title: {
             text: '场所类型统计',
             subtext: '',
@@ -127,7 +132,9 @@ function draw(names, nums) {
     });
 }
 
-//选择当前下拉列表查询数据
+/**
+ * 选择当前下拉列表查询数据
+ */
 $("#query").click(function () {
     count();
 });
