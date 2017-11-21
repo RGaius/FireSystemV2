@@ -13,10 +13,14 @@ import java.util.Date;
  */
 public class Police implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 编号
+	 */
+	private Integer id;
 	
 	/**
   	 * 警号
-
  	 */
 	private String policeId;
 	/**
@@ -37,15 +41,29 @@ public class Police implements Serializable {
 	private Date createDate;
 
 	/**
-	 * 设置：警号
+	 * 获取 编号
+	 * @return integer
+	 */
+	public Integer getId() {
+		return id;
+	}
 
+	/**
+	 * 设置编号
+	 * @param id 编号
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * 设置：警号
 	 */
 	public void setPoliceId(String policeId) {
 		this.policeId = policeId;
 	}
 	/**
 	 * 获取：警号
-
 	 */
 	public String getPoliceId() {
 		return policeId;

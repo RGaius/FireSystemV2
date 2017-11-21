@@ -54,13 +54,13 @@ public class PoliceController {
 	
 	/**
 	 * 信息
-	 * @param policeId
+	 * @param id
 	 * @return Fire
 	 */
 	@GetMapping("/info/{policeId}")
 	@RequiresPermissions("fire:police:info")
-	public Fire info(@PathVariable("policeId") Integer policeId){
-		PoliceVO police = policeService.queryObject(policeId);
+	public Fire info(@PathVariable("id") Integer id){
+		PoliceVO police = policeService.queryObject(id);
 		
 		return Fire.ok().put("police", police);
 	}
@@ -93,13 +93,13 @@ public class PoliceController {
 	
 	/**
 	 * 删除
-	 * @param policeIds
+	 * @param ids
 	 * @return Fire
 	 */
 	@DeleteMapping("/delete")
 	@RequiresPermissions("fire:police:delete")
-	public Fire delete(@RequestBody Integer[] policeIds){
-		policeService.deleteBatch(policeIds);
+	public Fire delete(@RequestBody Integer[] ids){
+		policeService.deleteBatch(ids);
 		
 		return Fire.ok();
 	}

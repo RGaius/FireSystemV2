@@ -2,6 +2,7 @@ package xhu.wncg.common.exception;
 
 /**
  * 自定义异常
+ *
  * @author BZhao
  * @version 2017/10/24.
  */
@@ -11,10 +12,11 @@ public class FireException extends RuntimeException {
     private String msg;
     private int code = 500;
 
-    public FireException(String msg){
+    public FireException(String msg) {
         super(msg);
         this.msg = msg;
     }
+
     public FireException(String msg, Throwable e) {
         super(msg, e);
         this.msg = msg;

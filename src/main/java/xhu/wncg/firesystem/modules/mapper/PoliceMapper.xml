@@ -3,8 +3,9 @@
 
 <mapper namespace="xhu.wncg.firesystem.modules.mapper.PoliceMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="xhu.wncg.firesystem.modules.pojo.Police" id="policeMap">
+        <result property="id" column="id"/>
         <result property="policeId" column="police_id"/>
         <result property="policeStationId" column="police_station_id"/>
         <result property="moblie" column="moblie"/>
@@ -12,30 +13,30 @@
         <result property="createDate" column="create_date"/>
     </resultMap>
 
-	<select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.Police">
-		select * from t_police where police_id = #{value}
+    <select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.Police">
+		select * from t_police where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.Police">
-		select * from t_police
+    <select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.Police">
+        select * from t_police
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by police_id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
 		select count(*) from t_police 
 	</select>
-	 
-	<insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.Police">
+
+    <insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.Police">
 		insert into t_police
 		(
 			`police_id`, 
@@ -53,27 +54,28 @@
 			#{createDate}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.Police">
-		update t_police 
-		<set>
-			<if test="policeStationId != null">`police_station_id` = #{policeStationId}, </if>
-			<if test="moblie != null">`moblie` = #{moblie}, </if>
-			<if test="relName != null">`rel_name` = #{relName}, </if>
-			<if test="createDate != null">`create_date` = #{createDate}</if>
-		</set>
-		where police_id = #{policeId}
-	</update>
-	
-	<delete id="delete">
-		delete from t_police where police_id = #{value}
+
+    <update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.Police">
+        update t_police
+        <set>
+            <if test="policeId != null">police_id = #{policeId},</if>
+            <if test="policeStationId != null">`police_station_id` = #{policeStationId},</if>
+            <if test="moblie != null">`moblie` = #{moblie},</if>
+            <if test="relName != null">`rel_name` = #{relName},</if>
+            <if test="createDate != null">`create_date` = #{createDate}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+		delete from t_police where id = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from t_police where police_id in 
-		<foreach item="policeId" collection="array" open="(" separator="," close=")">
-			#{policeId}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from t_police where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>
