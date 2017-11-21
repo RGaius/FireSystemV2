@@ -21,7 +21,7 @@ public class DailyTable implements Serializable {
 	/**
   	 * 检查人员id
  	 */
-	private Integer policeId;
+	private String policeId;
 	/**
   	 * 场所id
  	 */
@@ -66,13 +66,13 @@ public class DailyTable implements Serializable {
 	/**
 	 * 设置：检查人员id
 	 */
-	public void setPoliceId(Integer policeId) {
+	public void setPoliceId(String policeId) {
 		this.policeId = policeId;
 	}
 	/**
 	 * 获取：检查人员id
 	 */
-	public Integer getPoliceId() {
+	public String getPoliceId() {
 		return policeId;
 	}
 	/**

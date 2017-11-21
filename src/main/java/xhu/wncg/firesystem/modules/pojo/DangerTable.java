@@ -20,7 +20,6 @@ public class DangerTable implements Serializable {
 	private String dangerTableId;
 	/**
 	 * 检查人员id
-
 	 */
 	private String policeId;
 	/**
