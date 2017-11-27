@@ -30,4 +30,10 @@ public interface DailyTableService extends BaseService<DailyTableQO, DailyTableV
      */
     DailyTableVO queryAll(Integer dailyTableId);
 
+    /**
+     * 根据警员 ID 查询警员查询次数
+     * @param policeId
+     * @return
+     */
+    List<DailyTableVO> count(Integer policeId);
 }

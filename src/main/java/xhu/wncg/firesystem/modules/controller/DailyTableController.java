@@ -128,5 +128,15 @@ public class DailyTableController {
 		DailyTableVO dailyTableVO=dailyTableService.queryAll(dailyTableId);
 		return Fire.ok().put("data",dailyTableVO);
 	}
-	
+
+	/**
+	 * 根据警员 id 查询警员检查次数
+	 * @param policeId 警员 Id
+	 * @return
+	 */
+	@GetMapping("/count")
+	public Fire count(Integer policeId){
+		List<DailyTableVO> countList=dailyTableService.count(policeId);
+		return Fire.ok().put("data",countList);
+	}
 }

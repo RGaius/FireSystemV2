@@ -76,4 +76,9 @@ public class DailyTableServiceImpl implements DailyTableService {
 		dailyTableVO.setUnit(unitService.queryById(dailyTableVO.getUnitId()));
 		return dailyTableVO;
 	}
+
+	@Override
+	public List<DailyTableVO> count(Integer policeId){
+		return dailyTableMapper.count(policeId);
+	}
 }

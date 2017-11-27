@@ -1,12 +1,15 @@
 package xhu.wncg.firesystem.modules.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import xhu.wncg.firesystem.modules.controller.vo.DailyTableVO;
 import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
 import xhu.wncg.common.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import xhu.wncg.firesystem.modules.pojo.DailyTable;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 日常检查表
@@ -31,4 +34,11 @@ public interface DailyTableMapper extends BaseMapper<DailyTableQO, DailyTableVO>
      * @return DailyTableVO
      */
     DailyTableVO queryByDailyTableId(Integer dailyTableId);
+
+    /**
+     * 通过policeid查询警员检查次数
+     * @param policeId
+     * @return
+     */
+    List<DailyTableVO> count(@Param("policeId") Integer policeId);
 }
