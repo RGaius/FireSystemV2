@@ -2,6 +2,7 @@ package xhu.wncg.firesystem.modules.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
@@ -131,12 +132,12 @@ public class DailyTableController {
 
 	/**
 	 * 根据警员 id 查询警员检查次数
-	 * @param policeId 警员 Id
+	 * @param map 警员 Id,起始时间
 	 * @return
 	 */
 	@GetMapping("/count")
-	public Fire count(Integer policeId){
-		List<DailyTableVO> countList=dailyTableService.count(policeId);
+	public Fire count(Map<String,Array> map){
+		List<DailyTableVO> countList=dailyTableService.count(map);
 		return Fire.ok().put("data",countList);
 	}
 }

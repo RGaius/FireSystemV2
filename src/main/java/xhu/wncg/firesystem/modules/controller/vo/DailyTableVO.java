@@ -4,7 +4,9 @@ import xhu.wncg.firesystem.modules.pojo.DailyTable;
 import xhu.wncg.firesystem.modules.pojo.Picture;
 import xhu.wncg.firesystem.modules.pojo.Unit;
 
+import java.lang.reflect.Array;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 日常检查表
@@ -22,23 +24,45 @@ public class DailyTableVO extends DailyTable {
     /**
      * 场所基本信息
      */
-   private Unit unit;
+    private Unit unit;
 
-   public List<Picture> getPicture(){
-       return pictures;
-   }
+    public List<Picture> getPicture() {
+        return pictures;
+    }
 
-   public DailyTableVO setPicture(List<Picture> pictures){
-       this.pictures=pictures;
-       return this;
-   }
+    public DailyTableVO setPicture(List<Picture> pictures) {
+        this.pictures = pictures;
+        return this;
+    }
 
-   public Unit getUnit(){
-       return unit;
-   }
+    public Unit getUnit() {
+        return unit;
+    }
 
-   public DailyTableVO setUnit(Unit unit){
-       this.unit=unit;
-       return this;
-   }
+    public DailyTableVO setUnit(Unit unit) {
+        this.unit = unit;
+        return this;
+    }
+
+    /**
+     * 场所数量
+     */
+    private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public DailyTableVO setNumber(Integer number) {
+        this.number = number;
+        return this;
+    }
+
+    public Map<String,Array> map;
+    public void setMap(Map<String, Array> map) {
+        this.map = map;
+    }
+    public Map<String, Array> getMap(Map<String, Array> map){
+        return map;
+    }
 }

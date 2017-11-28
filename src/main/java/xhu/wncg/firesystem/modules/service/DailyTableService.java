@@ -5,7 +5,10 @@ import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
 import xhu.wncg.common.service.BaseService;
 import xhu.wncg.firesystem.modules.pojo.DailyTable;
 
+import java.lang.reflect.Array;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 日常检查表
@@ -32,8 +35,8 @@ public interface DailyTableService extends BaseService<DailyTableQO, DailyTableV
 
     /**
      * 根据警员 ID 查询警员查询次数
-     * @param policeId
+     * @param map
      * @return
      */
-    List<DailyTableVO> count(Integer policeId);
+    List<DailyTableVO> count(Map<String,Array> map);
 }

@@ -3,6 +3,7 @@ package xhu.wncg.firesystem.modules.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
@@ -78,7 +79,7 @@ public class DailyTableServiceImpl implements DailyTableService {
 	}
 
 	@Override
-	public List<DailyTableVO> count(Integer policeId){
-		return dailyTableMapper.count(policeId);
+	public List<DailyTableVO> count(Map<String,Array> map){
+		return dailyTableMapper.count(map);
 	}
 }

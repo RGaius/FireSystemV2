@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>场所统计</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/layer/layer.js"></script>
+    <script src="../../plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="../../plugins/vue/vue.min.js"></script>
+    <script src="../../plugins/validator/validator.min.js"></script>
+    <script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../plugins/echarts/echarts.min.js"></script>
+</head>
+<body>
+<div id="App">
+    <div class="grid-btn">
+        <div id="listPoliceStation">
+            <div class="form-group col-sm-4">
+                <select id="list_policeStation" name="list_policeStation" class="form-control"></select>
+            </div>
+            <a id="query" class="btn btn btn-primary" @click="query"><i class="fa fa-search"></i>查询</a>
+        </div>
+    </div>
+    <div id="draw">
+        <div id="unitChart" style="width: 100%;height:600px;"></div>
+    </div>
+</div>
+<script src="../../js/modules/count/unit.js"></script>
+</body>
+</html>

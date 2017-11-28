@@ -7,6 +7,7 @@ import xhu.wncg.common.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import xhu.wncg.firesystem.modules.pojo.DailyTable;
 
+import java.lang.reflect.Array;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +38,8 @@ public interface DailyTableMapper extends BaseMapper<DailyTableQO, DailyTableVO>
 
     /**
      * 通过policeid查询警员检查次数
-     * @param policeId
+     * @param map
      * @return
      */
-    List<DailyTableVO> count(@Param("policeId") Integer policeId);
+    List<DailyTableVO> count(@Param("all") Map<String, Array> map);
 }

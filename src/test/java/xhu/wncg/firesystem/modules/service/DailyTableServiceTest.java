@@ -12,6 +12,7 @@ import xhu.wncg.firesystem.modules.controller.vo.DailyTableVO;
 import xhu.wncg.firesystem.modules.pojo.DailyTable;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -36,13 +37,14 @@ public class DailyTableServiceTest {
     public void queryAll() throws Exception {
     }
 
-    @Test
+   /* @Test
     public void count() throws Exception{
-        dailyTableService.count(7);
+        dailyTableService.count();
         List<DailyTableVO> list = dailyTableService.count(7 );
         for (DailyTable o : list) {
             System.out.println(o.toString());
         }
-    }
 
+    }
+*/
 }
