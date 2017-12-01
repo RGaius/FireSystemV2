@@ -38,8 +38,8 @@ public interface DailyTableMapper extends BaseMapper<DailyTableQO, DailyTableVO>
 
     /**
      * 通过policeid查询警员检查次数
-     * @param map
+     * @param params
      * @return
      */
-    List<DailyTableVO> count(@Param("all") Map<String, Array> map);
+    List<DailyTableVO> count(@Param("params") Object params);
 }

@@ -102,12 +102,15 @@
  	</select>
 
     <select id="count" resultType="xhu.wncg.firesystem.modules.controller.vo.DailyTableVO"
-            parameterType="java.lang.Integer">
+            parameterType="map">
         SELECT police_id AS policeId,COUNT(police_id) AS number FROM t_daily_table
         <where>
-            <if test="all.policeId != null">
-                police_id=#{all.policeId}
-                AND create_date BETWEEN #{all.begin} and #{all.end}
+            <if test="params.policeId != null">
+                police_id=#{params.policeId}
+                AND create_date BETWEEN
+                <if test="params.begindate !=null &amp; params.enddate != null">
+                   #{params.begindate} AND  #{params.enddate}
+                </if>
             </if>
         </where>
     </select>

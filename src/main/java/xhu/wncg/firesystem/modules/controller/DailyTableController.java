@@ -132,12 +132,12 @@ public class DailyTableController {
 
 	/**
 	 * 根据警员 id 查询警员检查次数
-	 * @param map 警员 Id,起始时间
+	 * @param params 警员 Id,起始时间
 	 * @return
 	 */
-	@GetMapping("/count")
-	public Fire count(Map<String,Array> map){
-		List<DailyTableVO> countList=dailyTableService.count(map);
+	@PostMapping("/count")
+	public Fire count(DailyTableQO params){
+		List<DailyTableVO> countList=dailyTableService.count(params);
 		return Fire.ok().put("data",countList);
 	}
 }

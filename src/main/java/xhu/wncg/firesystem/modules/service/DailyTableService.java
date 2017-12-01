@@ -35,8 +35,8 @@ public interface DailyTableService extends BaseService<DailyTableQO, DailyTableV
 
     /**
      * 根据警员 ID 查询警员查询次数
-     * @param map
+     * @param params
      * @return
      */
-    List<DailyTableVO> count(Map<String,Array> map);
+    List<DailyTableVO> count(Object params);
 }

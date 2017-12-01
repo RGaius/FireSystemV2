@@ -79,7 +79,7 @@ public class DailyTableServiceImpl implements DailyTableService {
 	}
 
 	@Override
-	public List<DailyTableVO> count(Map<String,Array> map){
-		return dailyTableMapper.count(map);
+	public List<DailyTableVO> count(Object params){
+		return dailyTableMapper.count(params);
 	}
 }

@@ -58,11 +58,8 @@ public class DailyTableVO extends DailyTable {
         return this;
     }
 
-    public Map<String,Array> map;
-    public void setMap(Map<String, Array> map) {
+    public Map map;
+    public void setMap(Map map) {
         this.map = map;
-    }
-    public Map<String, Array> getMap(Map<String, Array> map){
-        return map;
     }
 }
