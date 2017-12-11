@@ -32,12 +32,10 @@ function listParams(data) {
 }
 */
 function getParams() {
-
-
 var params = {
-    policeId: '11',
-    begindate: null,
-    enddate: '2017-03-25'
+    policeId: '7',
+    begindate:  '2016-03-22',
+    enddate:  '2017-12-10'
 };
 $.ajax({
     url: baseURL + "fire/dailytable/count",

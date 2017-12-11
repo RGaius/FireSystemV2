@@ -41,5 +41,5 @@ public interface DailyTableMapper extends BaseMapper<DailyTableQO, DailyTableVO>
      * @param params
      * @return
      */
-    List<DailyTableVO> count(@Param("params") Object params);
+    List<DailyTableVO> count(@Param("params")Object params);
 }

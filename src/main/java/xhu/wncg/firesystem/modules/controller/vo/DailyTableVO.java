@@ -26,6 +26,75 @@ public class DailyTableVO extends DailyTable {
      */
     private Unit unit;
 
+    String policename;
+    String checkdate;
+    String day;
+    String week;
+    String month;
+    String year;
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+
+
+    public Map getMap() {
+        return map;
+    }
+
+    public String getPolicename() {
+        return policename;
+    }
+
+    public void setPolicename(String policename) {
+        this.policename = policename;
+    }
+
+    public String getCheckdate() {
+        return checkdate;
+    }
+
+    public void setCheckdate(String checkdate) {
+        this.checkdate = checkdate;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
     public List<Picture> getPicture() {
         return pictures;
     }

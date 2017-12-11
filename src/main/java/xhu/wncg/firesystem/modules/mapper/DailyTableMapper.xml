@@ -17,8 +17,10 @@
     </resultMap>
 
     <select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.DailyTable">
-		select * from t_daily_table where daily_table_id = #{value}
-	</select>
+        SELECT *
+        FROM t_daily_table
+        WHERE daily_table_id = #{value}
+    </select>
 
     <select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.DailyTable">
         select * from t_daily_table
@@ -36,34 +38,35 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-		select count(*) from t_daily_table 
-	</select>
+        SELECT count(*)
+        FROM t_daily_table
+    </select>
 
     <insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.DailyTable" useGeneratedKeys="true"
             keyProperty="dailyTableId">
-		insert into t_daily_table
-		(
-			`police_id`, 
-			`unit_id`, 
-			`checker`, 
-			`other_checker`, 
-			`problem`, 
-			`remark`, 
-			`create_date`, 
-			`status`
-		)
-		values
-		(
-			#{policeId}, 
-			#{unitId}, 
-			#{checker}, 
-			#{otherChecker}, 
-			#{problem}, 
-			#{remark}, 
-			#{createDate}, 
-			#{status}
-		)
-	</insert>
+        INSERT INTO t_daily_table
+        (
+            `police_id`,
+            `unit_id`,
+            `checker`,
+            `other_checker`,
+            `problem`,
+            `remark`,
+            `create_date`,
+            `status`
+        )
+        VALUES
+            (
+                #{policeId},
+                #{unitId},
+                #{checker},
+                #{otherChecker},
+                #{problem},
+                #{remark},
+                #{createDate},
+                #{status}
+            )
+    </insert>
 
     <update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.DailyTable">
         update t_daily_table
@@ -81,8 +84,9 @@
     </update>
 
     <delete id="delete">
-		delete from t_daily_table where daily_table_id = #{value}
-	</delete>
+        DELETE FROM t_daily_table
+        WHERE daily_table_id = #{value}
+    </delete>
 
     <delete id="deleteBatch">
         delete from t_daily_table where daily_table_id in
@@ -93,24 +97,41 @@
 
     <!--自定义-->
     <select id="countDaily" resultType="xhu.wncg.firesystem.modules.pojo.DailyTable" parameterType="java.lang.Integer">
-		SELECT * FROM t_daily_table WHERE unit_id=#{countId}
-	</select>
+        SELECT *
+        FROM t_daily_table
+        WHERE unit_id = #{countId}
+    </select>
 
     <select id="queryByDailyTableId" resultType="xhu.wncg.firesystem.modules.controller.vo.DailyTableVO"
             parameterType="java.lang.Integer">
-		SELECT * FROM t_daily_table WHERE daily_table_id=#{dailyTableId}
- 	</select>
+        SELECT *
+        FROM t_daily_table
+        WHERE daily_table_id = #{dailyTableId}
+    </select>
 
     <select id="count" resultType="xhu.wncg.firesystem.modules.controller.vo.DailyTableVO"
             parameterType="map">
-        SELECT police_id AS policeId,COUNT(police_id) AS number FROM t_daily_table
+        SELECT
+        a.police_id AS policeId,
+        b.rel_name AS policename,
+        DATE_FORMAT(a.`create_date`, '%Y-%m-%d') AS checkdate,
+        c.day,
+        c.day_of_week AS week,
+        c.day_of_month AS month,
+        c.day_of_year AS year
+        FROM t_daily_table AS a
+        RIGHT JOIN (SELECT police_id,rel_name
+        FROM t_police
         <where>
-            <if test="params.policeId != null">
-                police_id=#{params.policeId}
-                AND create_date BETWEEN
-                <if test="params.begindate !=null &amp; params.enddate != null">
-                   #{params.begindate} AND  #{params.enddate}
-                </if>
+            <if test="params.policeId!=null">
+                police_id = #{params.policeId} OR rel_name= #{params.policeId}
+            </if>
+        </where>
+        ) AS b ON a.`police_id` = b.`police_id`
+        LEFT JOIN dates_d AS c ON DATE_FORMAT(a.`create_date`, '%Y-%m-%d') = c.`date`
+        <where>
+            <if test="params.begindate!=null and params.enddate!=null">
+                a.create_date BETWEEN #{params.begindate} and #{params.enddate}
             </if>
         </where>
     </select>

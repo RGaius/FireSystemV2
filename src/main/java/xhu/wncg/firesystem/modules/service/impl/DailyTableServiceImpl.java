@@ -9,6 +9,7 @@ import java.util.Map;
 
 import xhu.wncg.firesystem.modules.mapper.DailyTableMapper;
 import xhu.wncg.firesystem.modules.pojo.DailyTable;
+import xhu.wncg.firesystem.modules.pojo.Police;
 import xhu.wncg.firesystem.modules.service.DailyTableService;
 import xhu.wncg.firesystem.modules.controller.vo.DailyTableVO;
 import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
