@@ -19,11 +19,11 @@
         <result property="createDate" column="create_date"/>
     </resultMap>
 
-    <select id="queryObject" resultType="xhu.wncg.firesystem.modules.pojo.Unit">
+    <select id="queryObject" resultType="xhu.wncg.firesystem.modules.controller.vo.UnitVO">
 		select * from t_unit where unit_id = #{value}
 	</select>
 
-    <select id="queryList" resultType="xhu.wncg.firesystem.modules.pojo.Unit">
+    <select id="queryList" resultType="xhu.wncg.firesystem.modules.controller.vo.UnitVO">
         select * from t_unit
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -42,7 +42,7 @@
 		select count(*) from t_unit 
 	</select>
 
-    <insert id="save" parameterType="xhu.wncg.firesystem.modules.pojo.Unit" useGeneratedKeys="true"
+    <insert id="save" parameterType="xhu.wncg.firesystem.modules.controller.vo.UnitVO" useGeneratedKeys="true"
             keyProperty="unitId">
 		insert into t_unit
 		(
@@ -74,7 +74,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="xhu.wncg.firesystem.modules.pojo.Unit">
+    <update id="update" parameterType="xhu.wncg.firesystem.modules.controller.vo.UnitVO">
         update t_unit
         <set>
             <if test="policeStationId != null">`police_station_id` = #{policeStationId},</if>
@@ -114,7 +114,7 @@
         GROUP BY property
     </select>
 
-    <select id="queryCount" resultType="xhu.wncg.firesystem.modules.pojo.Unit">
+    <select id="queryCount" resultType="xhu.wncg.firesystem.modules.controller.vo.UnitVO">
         SELECT * FROM t_unit
          <where>
              <if test="countKeys != null">
@@ -126,7 +126,7 @@
          </where>
     </select>
 
-    <select id="queryById" resultType="xhu.wncg.firesystem.modules.pojo.Unit" parameterType="java.lang.Integer">
+    <select id="queryById" resultType="xhu.wncg.firesystem.modules.controller.vo.UnitVO" parameterType="java.lang.Integer">
         SELECT * FROM t_unit WHERE unit_id=#{countId}
     </select>
 

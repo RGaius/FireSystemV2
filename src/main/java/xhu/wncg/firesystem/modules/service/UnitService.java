@@ -11,15 +11,16 @@ import java.util.List;
 
 /**
  * 场所表
- * 
+ *
  * @author zhaobo
- * @email 15528330581@163.com
  * @version 2017-11-02 15:58:16
+ * @email 15528330581@163.com
  */
 public interface UnitService extends BaseService<UnitQO, UnitVO> {
 
     /**
      * 统计派出所辖区中场所分布情况
+     *
      * @param policeStationId 派出所id
      * @return list
      */
@@ -27,13 +28,17 @@ public interface UnitService extends BaseService<UnitQO, UnitVO> {
 
     /**
      * 模糊查询场所,按创建时间查询场所
-     * @param  countKeys 关键字 startTime,endTime 起止时间
+     *
+     * @param countKeys 关键字
+     * @param startTime 起始时间
+     * @param endTime   截至时间
      * @return list
      */
-    List<Unit> queryCount(@Param("countKeys")String countKeys,@Param("startTime") Date startTime, @Param("endTime") Date endTime);
+    List<Unit> queryCount(String countKeys, Date startTime, Date endTime);
 
     /**
      * 通过场所id查场所信息
+     *
      * @param countId
      * @return Unit
      */

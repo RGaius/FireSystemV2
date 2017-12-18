@@ -106,7 +106,7 @@ public class PoliceStationController {
 	}
 
 	/**
-	 * 查询派出所数据
+	 * 获取派出所列表
 	 * @return Fire
 	 */
 	@GetMapping("/listPoliceStation")

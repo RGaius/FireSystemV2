@@ -10,5 +10,5 @@ import xhu.wncg.firesystem.modules.pojo.PoliceStation;
  * @version 2017-11-02 15:58:16
  */
 public class PoliceStationVO extends PoliceStation {
-    // TODO
+
 }

@@ -29,7 +29,9 @@ public interface UnitMapper extends BaseMapper<UnitQO, UnitVO> {
 
     /**
      * 模糊查询场所,按创建时间查询场所
-     * @param countKeys 关键字 startTime,endTime 起止时间
+     * @param countKeys 关键字
+     *  @param startTime 起始日期
+     *  @param endTime  截至日期
      * @return list
      */
     List<Unit> queryCount(@Param("countKeys") String countKeys,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
