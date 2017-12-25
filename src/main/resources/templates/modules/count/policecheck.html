@@ -22,14 +22,24 @@
     <script src="../../plugins/echarts/echarts.min.js"></script>
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     <div class="grid-btn">
-        <div class="form-group col-sm-2">
-            <input type="text" class="form-control" v-model="params.policeId" @keyup.enter="query" placeholder="警员ID/姓名">
+        <div class="row police_check" style="border: none">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" v-model="params.policeId" @keyup.enter="query"
+                           placeholder="警员ID/姓名">
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <a class="btn btn-success" @click="query"><i class="fa fa-search"></i>查询</a>
+            </div>
         </div>
-        <a class="btn btn-default" @click="query">查询</a>
     </div>
+    <div id="myChart"  style="height:400px;"></div>
 </div>
+
 <script src="../../js/modules/count/policecheck_count.js"></script>
 </body>
 </html>

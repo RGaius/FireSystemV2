@@ -116,9 +116,9 @@
         b.rel_name AS policename,
         DATE_FORMAT(a.`create_date`, '%Y-%m-%d') AS checkdate,
         c.day,
-        c.day_of_week AS week,
-        c.day_of_month AS month,
-        c.day_of_year AS year
+        c.week_of_year AS week,
+        c.month_of_year AS month,
+        c.year AS year
         FROM t_daily_table AS a
         RIGHT JOIN (SELECT police_id,rel_name
         FROM t_police

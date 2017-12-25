@@ -13,6 +13,16 @@ public class DailyTableQO extends DailyTable {
     private String begindate;
     private String enddate;
 
+    public int getDatatype() {
+        return datatype;
+    }
+
+    public void setDatatype(int datatype) {
+        this.datatype = datatype;
+    }
+
+    private int datatype;
+
     public String getBegindate() {
         return begindate;
     }

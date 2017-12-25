@@ -4,9 +4,11 @@ import xhu.wncg.firesystem.modules.controller.vo.DailyTableVO;
 import xhu.wncg.firesystem.modules.controller.qo.DailyTableQO;
 import xhu.wncg.common.service.BaseService;
 import xhu.wncg.firesystem.modules.pojo.DailyTable;
+import xhu.wncg.firesystem.modules.pojo.PoliceCheckSum;
 
 import java.lang.reflect.Array;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,4 +41,13 @@ public interface DailyTableService extends BaseService<DailyTableQO, DailyTableV
      * @return
      */
     List<DailyTableVO> count(Object params);
+
+    /**
+     * 统计派出所检查情况
+     * @return
+     * @param datatype
+     * @param countList
+     * @param maps
+     */
+    List<PoliceCheckSum> fillPoliceCheckSum(int datatype, List<DailyTableVO> countList, HashMap<String, PoliceCheckSum> maps);
 }

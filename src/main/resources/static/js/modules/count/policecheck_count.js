@@ -1,8 +1,8 @@
 var vm = new Vue({
     el: '#app',
     data: {
-        params:{},
-        datalist:{}
+        params: {},
+        datalist: {}
     },
     methods: {
         query: function () {
@@ -14,9 +14,16 @@ var vm = new Vue({
                 dataType: "json",
                 data: vm.params,
                 success: function (data) {
-                    handleData(data);
+                    //对前台输入数据查询后是否有数据进行检查
+                    if (data.data != null) {
+                        if (data.data == 0) {
+                            alert("请确认输入是否正确！")
+                        } else
+                            handleData(data);
+                    }
+
                 },
-                error:function () {
+                error: function () {
                     alert("获取数据失败！")
                 }
             });
@@ -30,132 +37,70 @@ var vm = new Vue({
  * 处理数据
  * @param datalist
  */
-function handleData(datalist){
-
-    Histogram(datalist);
+function handleData(datalist) {
+    var xaxis = [];
+    var yaxis = [];
+    $.each(datalist.data, function (key, values) {
+        xaxis.push(values.dimensionValue);
+        yaxis.push(values.ammount);
+    });
+    Histogram(xaxis, yaxis);
 }
 
 /**
  * 画柱状图
- * @param checklist
+ * @param xaxis
+ * @param yaxis
  */
-function Histogram(checklist){
-    var dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
-    var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
-    var yMax = 500;
-    var dataShadow = [];
-
-    for (var i = 0; i < data.length; i++) {
-        dataShadow.push(yMax);
-    }
-
+function Histogram(xaxis, yaxis) {
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById("myChart"));
     option = {
         title: {
-            text: '警员查询记录',
+            text: '警员检查统计图',
         },
-        xAxis: {
-            data: dataAxis,
-            axisLabel: {
-                inside: true,
-                textStyle: {
-                    color: '#fff'
-                }
-            },
-            axisTick: {
-                show: false
-            },
-            axisLine: {
-                show: false
-            },
-            z: 10
+        tooltip: {
+            trigger: 'axis'
         },
-        yAxis: {
-            axisLine: {
-                show: false
-            },
-            axisTick: {
-                show: false
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#999'
-                }
+        legend: {
+            data: ['检查数量']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
             }
         },
-        dataZoom: [
+        calculable: true,
+        xAxis: [
             {
-                type: 'inside'
+                type: 'category',
+                data: xaxis
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
             }
         ],
         series: [
-            { // For shadow
-                type: 'bar',
-                itemStyle: {
-                    normal: {color: 'rgba(0,0,0,0.05)'}
-                },
-                barGap:'-100%',
-                barCategoryGap:'40%',
-                data: dataShadow,
-                animation: false
-            },
             {
+                name: '检查数量',
                 type: 'bar',
-                itemStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#83bff6'},
-                                {offset: 0.5, color: '#188df0'},
-                                {offset: 1, color: '#188df0'}
-                            ]
-                        )
-                    },
-                    emphasis: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#2378f7'},
-                                {offset: 0.7, color: '#2378f7'},
-                                {offset: 1, color: '#83bff6'}
-                            ]
-                        )
-                    }
-                },
-                data: data
+                data: yaxis
             }
         ]
     };
-  /*  // Enable data zoom when user click bar.
-    var zoomSize = 6;
-    myChart.on('click', function (params) {
-        console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
-        myChart.dispatchAction({
-            type: 'dataZoom',
-            startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
-            endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
-        });
-    });*/
+
+    // 为echarts对象加载数据
+    myChart.setOption(option);
+
 }
 
-/*function getParams() {
-var params = {
-    policeId: '7',
-    begindate:  '2016-03-22',
-    enddate:  '2017-12-10'
-};
-$.ajax({
-    url: baseURL + "fire/dailytable/count",
-    timeout: 3000,
-    async: false,
-    type: "POST",
-    dataType: "json",
-    data: params,
-    success: function (data) {
-        console.log(data);
-    }
-});
-}*/
-$(document).ready(function(){
-   vm.query();
+$(document).ready(function () {
+    vm.query();
 });
