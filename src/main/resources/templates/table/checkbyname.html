@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>按场所查询</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../plugins/bootstrap-select/css/bootstrap-select.css">
+
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="../plugins/layer/layer.js"></script>
+    <script src="../plugins/vue/vue.min.js"></script>
+    <script src="../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../plugins/validator/validator.min.js"></script>
+    <script src="../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../plugins/ztree/jquery.ztree.all.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-show="list">
+        <div class="grid-btn">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <select id="selectName" class="selectpicker show-tick form-control" multiple data-live-search="true">
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-1">
+                <a class="btn btn-success"><i class="fa fa-search">查询</i></a>
+            </div>
+
+            <div class="col-sm-1">
+                <a class="btn btn-info"><i class="fa fa-table">详情</i></a>
+            </div>
+        </div>
+
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+
+
+    <!--模态框-->
+
+</div>
+
+</body>
+<script src="../js/table/checkbyname.js"></script>
+</html>
