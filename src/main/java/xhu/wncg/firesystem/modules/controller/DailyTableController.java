@@ -153,7 +153,6 @@ public class DailyTableController {
             List<DailyTableVO> countList = dailyTableService.count(params);
             HashMap<String, PoliceCheckSum> maps = new HashMap<String, PoliceCheckSum>();
             list = dailyTableService.fillPoliceCheckSum(params.getDatatype(), countList, maps);
-
         } else {
             System.out.println("沒有輸入");
         }

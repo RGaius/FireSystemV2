@@ -37,6 +37,10 @@ public class DailyTableServiceTest {
     public void queryAll() throws Exception {
     }
 
+    @Test
+    public void fillPoliceCheckSum() throws Exception {
+
+    }
    /* @Test
     public void count() throws Exception{
         dailyTableService.count();

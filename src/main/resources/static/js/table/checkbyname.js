@@ -1,8 +1,8 @@
 /**
  * Created by jing on 2017/11/23.
- */
 
-$("#selectName").on('shown.bs.select',function(e){
+
+ $("#selectName").on('shown.bs.select',function(e){
     console.log('展开之后');
     $('#selectName').prev().find("input").keydown(function(){
         $('#selectName').prev().find("input").attr('id',"unitId"); //为input增加id属性
@@ -12,15 +12,14 @@ $("#selectName").on('shown.bs.select',function(e){
 })
 
 
-function getUnitName() {
+ function getUnitName() {
     var param={};
     param.countKeys=$('#unitId').val();
-
     param.startTime=null;
     param.endTime=null;
     console.log(param);
     $.ajax({
-        url: "fire/unit/queryCount",
+        url:baseURL+"fire/unit/queryCount",
         type:"get",
         dataType: "json",
         data:param,
@@ -33,3 +32,23 @@ function getUnitName() {
         },
     })
 }
+ $(document).ready(function () {
+   getUnitName();
+});
+ */
+var params = {};
+params.countKeys = "面";
+params.startTime = null;
+params.endTime = null;
+$.ajax({
+    url: baseURL + "fire/unit/queryCount",
+    type: "get",
+    dataType: "json",
+    data: params,
+    success: function (data) {
+        console.log(data);
+    },
+    error: function () {
+        console.log("error")
+    }
+});

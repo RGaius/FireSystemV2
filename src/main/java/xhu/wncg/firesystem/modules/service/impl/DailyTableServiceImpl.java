@@ -1,6 +1,5 @@
 package xhu.wncg.firesystem.modules.service.impl;
 
-import org.apache.commons.collections.map.ListOrderedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,6 +83,46 @@ public class DailyTableServiceImpl implements DailyTableService {
     }
 
     /**
+     * 枚举dateType四种方式
+     */
+    public enum DateType {
+
+        Day(0),
+        Week(1),
+        Month(2),
+        Year(3);
+
+
+        private int datetype;
+
+        DateType(int code) {
+            this.datetype = code;
+        }
+
+        public int getCode() {
+            return datetype;
+        }
+
+        public void setCode(int code) {
+            this.datetype = code;
+        }
+
+        /**
+         * 根据value返回枚举类型,主要在switch中使用
+         * @param value
+         * @return
+         */
+        public static DateType getByValue(int value) {
+            for (DateType datetype : values()) {
+                if (datetype.getCode() == value) {
+                    return datetype;
+                }
+            }
+            return null;
+        }
+
+        }
+    /**
      * 统计警员检查情况
      *
      * @param dateType
@@ -96,16 +135,16 @@ public class DailyTableServiceImpl implements DailyTableService {
         String key;
         PoliceCheckSum policeCheckSum;
         for (DailyTableVO checkCount : count) {
-            switch (dateType) {
-                case 1:
+            switch (DateType.getByValue(dateType)) {
+                case Week:
                     // 周分组
                     key = checkCount.getYear() + "年" + checkCount.getWeek() + "周";
                     break;
-                case 2:
+                case Month:
                     // 月分组
                     key = checkCount.getYear() + "-" + checkCount.getMonth();
                     break;
-                case 3:
+                case Year:
                     // 年分组
                     key = checkCount.getYear();
                     break;

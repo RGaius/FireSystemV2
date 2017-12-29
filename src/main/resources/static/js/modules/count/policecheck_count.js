@@ -17,7 +17,7 @@ var vm = new Vue({
                     //对前台输入数据查询后是否有数据进行检查
                     if (data.data != null) {
                         if (data.data == 0) {
-                            alert("请确认输入是否正确！")
+                            alert("您所输入的警员不存在！")
                         } else
                             handleData(data);
                     }

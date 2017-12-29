@@ -122,8 +122,8 @@ public class UnitController {
 	 * @return object
 	 */
 	@GetMapping("/queryCount")
-	public Fire queryCount(String countKeys, Date startTime,Date endTime){
-		List<Unit> countList=unitService.queryCount(countKeys,startTime,endTime);
+	public Fire queryCount(UnitQO params){
+		List<Unit> countList=unitService.queryCount(params.getCountKeys(),params.getStartTime(),params.getEndTime());
 		return Fire.ok().put("data",countList);
 	}
 

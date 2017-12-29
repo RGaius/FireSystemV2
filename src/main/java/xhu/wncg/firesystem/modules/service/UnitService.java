@@ -1,6 +1,5 @@
 package xhu.wncg.firesystem.modules.service;
 
-import org.apache.ibatis.annotations.Param;
 import xhu.wncg.firesystem.modules.controller.vo.UnitVO;
 import xhu.wncg.firesystem.modules.controller.qo.UnitQO;
 import xhu.wncg.common.service.BaseService;
