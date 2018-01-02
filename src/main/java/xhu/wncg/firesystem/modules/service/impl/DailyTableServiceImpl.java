@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import xhu.wncg.firesystem.modules.pojo.DateType;
 import xhu.wncg.firesystem.modules.mapper.DailyTableMapper;
 import xhu.wncg.firesystem.modules.pojo.DailyTable;
 import xhu.wncg.firesystem.modules.pojo.PoliceCheckSum;
@@ -81,47 +82,6 @@ public class DailyTableServiceImpl implements DailyTableService {
     public List<DailyTableVO> count(Object params) {
         return dailyTableMapper.count(params);
     }
-
-    /**
-     * 枚举dateType四种方式
-     */
-    public enum DateType {
-
-        Day(0),
-        Week(1),
-        Month(2),
-        Year(3);
-
-
-        private int datetype;
-
-        DateType(int code) {
-            this.datetype = code;
-        }
-
-        public int getCode() {
-            return datetype;
-        }
-
-        public void setCode(int code) {
-            this.datetype = code;
-        }
-
-        /**
-         * 根据value返回枚举类型,主要在switch中使用
-         * @param value
-         * @return
-         */
-        public static DateType getByValue(int value) {
-            for (DateType datetype : values()) {
-                if (datetype.getCode() == value) {
-                    return datetype;
-                }
-            }
-            return null;
-        }
-
-        }
     /**
      * 统计警员检查情况
      *
