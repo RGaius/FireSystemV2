@@ -21,6 +21,9 @@ var vm = new Vue({
                         } else
                             handleData(data);
                     }
+                    else {
+                        alert("请输入警员id")
+                    }
 
                 },
                 error: function () {
