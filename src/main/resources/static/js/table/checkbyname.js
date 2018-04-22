@@ -1,54 +1,93 @@
-/**
- * Created by jing on 2017/11/23.
+var param={}
+$('#select').combobox({
+    prompt:"input",
+    required:true,
+    mode:'remote',
+    type:"get",
+    loader:function (q) {
+        $.ajax({
+            url:baseURL+"fire/unit/queryCount",
+            type:"get",
+            dataType:"json",
+            data:{
+                countKeys:JSON.stringify(q),
+                startTime:null,
+                endTime:null
+            },
+            success:function (rdata) {
+              console.log(rdata);
+            },
+            error:function () {
+                console.log("error");
+            }
 
 
- $("#selectName").on('shown.bs.select',function(e){
-    console.log('展开之后');
-    $('#selectName').prev().find("input").keydown(function(){
-        $('#selectName').prev().find("input").attr('id',"unitId"); //为input增加id属性
-        console.log($('#unitId').val()); //获取输入框值输出到控制台
-        getUnitName();
-    })
-})
+        })
+    }
 
+    }
+)
 
- function getUnitName() {
-    var param={};
-    param.countKeys=$('#unitId').val();
-    param.startTime=null;
-    param.endTime=null;
-    console.log(param);
-    $.ajax({
-        url:baseURL+"fire/unit/queryCount",
-        type:"get",
-        dataType: "json",
-        data:param,
-        success: function (data) {
-            console.log(data);
-            $.each(data, function (index, unit) {
-                $("#selectName").append("<option value=" + unit.id + ">" + unit.unit + "</option>");
-                $("#selectName" ).selectpicker('refresh');
-            });
+/*var vm=new Vue(
+    {
+        el:'#select1',
+        data:{
+            message:{}
         },
-    })
-}
- $(document).ready(function () {
-   getUnitName();
-});
- */
-var params = {};
-params.countKeys = "面";
-params.startTime = null;
-params.endTime = null;
+        methods:{
+            query:function () {
+                $.ajax({
+                        url: baseURL + "fire/unit/queryCount",
+                        type: "post",
+                        dataType:"json",
+                        data:{
+                            countKeys :vm.message,
+                            startTime:null,
+                            endTime:null
+                        },
+                        success:function (){
+
+                        },
+                        error:function () {
+                            alert("error")
+                        }
+                    }
+                )
+            }
+        }
+    }
+)
+*/
+
+
+
+
+
+/*$(document).ready(function () {
+    vm.query();
+});*/
+
+
+
+
+/* var param={};
+ param.countKeys=$('#unitId').val();
+ param.startTime=null;
+ param.endTime=null;
+
 $.ajax({
     url: baseURL + "fire/unit/queryCount",
     type: "get",
     dataType: "json",
-    data: params,
-    success: function (data) {
-        console.log(data);
+    data: {
+        countKeys :"面馆",
+        startTime:null,
+        endTime:null
+    },
+    success: function (rdata) {
+        console.log(rdata);
     },
     error: function () {
         console.log("error")
     }
-});
+});*/

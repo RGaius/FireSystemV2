@@ -8,6 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import xhu.wncg.FireSystemApplication;
+import xhu.wncg.firesystem.modules.controller.qo.UnitQO;
 import xhu.wncg.firesystem.modules.pojo.Unit;
 import xhu.wncg.firesystem.modules.service.UnitService;
 
@@ -30,8 +31,11 @@ public class UnitServiceImplTest {
 
     @Test
     public void queryCount() throws Exception {
-        String countKeys ="面馆";
-        unitService.queryCount(countKeys,null,null);
+        UnitQO params=new UnitQO();
+        params.setCountKeys(null);
+        params.setStartTime("2017-09-19 00:11:00");
+        params.setEndTime("2017-09-19 23:29:00");
+        System.out.println(unitService.queryCount(params));
     }
 
     @Test

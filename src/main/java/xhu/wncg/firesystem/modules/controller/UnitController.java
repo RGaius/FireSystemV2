@@ -2,6 +2,7 @@ package xhu.wncg.firesystem.modules.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -118,12 +119,12 @@ public class UnitController {
 
 	/**
 	 * 模糊查询场所, 按创建时间查询场所
-	 * @param countKeys 关键字 startTime,endTime 起止时间
+	 * @param
 	 * @return object
 	 */
 	@GetMapping("/queryCount")
-	public Fire queryCount(UnitQO params){
-		List<Unit> countList=unitService.queryCount(params.getCountKeys(),params.getStartTime(),params.getEndTime());
+	public Fire queryCount(UnitQO params) throws ParseException {
+		List<Unit> countList=unitService.queryCount(params);
 		return Fire.ok().put("data",countList);
 	}
 

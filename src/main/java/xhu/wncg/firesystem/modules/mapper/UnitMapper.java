@@ -1,6 +1,7 @@
 package xhu.wncg.firesystem.modules.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import org.omg.CORBA.Object;
 import xhu.wncg.firesystem.modules.controller.vo.UnitVO;
 import xhu.wncg.firesystem.modules.controller.qo.UnitQO;
 import xhu.wncg.common.mapper.BaseMapper;
@@ -29,12 +30,10 @@ public interface UnitMapper extends BaseMapper<UnitQO, UnitVO> {
 
     /**
      * 模糊查询场所,按创建时间查询场所
-     * @param countKeys 关键字
-     *  @param startTime 起始日期
-     *  @param endTime  截至日期
+     * @param
      * @return list
      */
-    List<Unit> queryCount(@Param("countKeys") String countKeys,@Param("startTime") Date startTime,@Param("endTime") Date endTime);
+    List<Unit> queryCount(@Param("countKeys") String countKeys,@Param("start") String start,@Param("end") String end);
 
     /**
      * 通过场所id查场所信息

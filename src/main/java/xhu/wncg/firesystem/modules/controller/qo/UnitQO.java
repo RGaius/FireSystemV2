@@ -2,8 +2,6 @@ package xhu.wncg.firesystem.modules.controller.qo;
 
 import xhu.wncg.firesystem.modules.pojo.Unit;
 
-import java.sql.Date;
-
 /**
  * 场所表
  *
@@ -13,6 +11,8 @@ import java.sql.Date;
  */
 public class UnitQO extends Unit {
     String countKeys;
+    String startTime;
+    String endTime;
 
     public String getCountKeys() {
         return countKeys;
@@ -22,22 +22,23 @@ public class UnitQO extends Unit {
         this.countKeys = countKeys;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public String getStartTime() {
+        String str=String.format("yyyy-MM-dd HH:mm:ss",startTime);
+        return str;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setStartTime(String startTime) {
+        this.startTime=startTime;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public String getEndTime() {
+        String str=String.format("yyyy-MM-dd HH:mm:ss",endTime);
+        return str;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setEndTime(String endTime) {
+        this.endTime=endTime;
     }
 
-    Date startTime;
-    Date endTime;
+
 }

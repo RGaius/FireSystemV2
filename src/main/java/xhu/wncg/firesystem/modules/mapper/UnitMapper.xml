@@ -114,15 +114,17 @@
         GROUP BY property
     </select>
 
-    <select id="queryCount" resultType="xhu.wncg.firesystem.modules.controller.vo.UnitVO">
+    <select id="queryCount" resultType="xhu.wncg.firesystem.modules.pojo.Unit" >
         SELECT * FROM t_unit
          <where>
-             <if test="countKeys != null">
-             unit_name LIKE CONCAT('%',#{countKeys},'%')
-             </if>
-             <if test="startTime != null and endTime != null">
-                 create_date between #{startTime} and #{endTime}
-             </if>
+             <choose>
+                 <when test="countKeys!=null" >
+                  unit_name LIKE CONCAT('%',#{countKeys},'%')
+                 </when>
+                 <otherwise>
+                     create_date between #{start} and #{end}
+                 </otherwise>
+             </choose>
          </where>
     </select>
 
