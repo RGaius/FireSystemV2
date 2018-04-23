@@ -1,5 +1,11 @@
 var param={}
-$('#select').combobox({
+
+$("#searchSuggest").bsSuggest({
+    
+
+
+})
+/*$('#select').combobox({
     prompt:"input",
     required:true,
     mode:'remote',
@@ -27,7 +33,7 @@ $('#select').combobox({
 
     }
 )
-
+*/
 /*var vm=new Vue(
     {
         el:'#select1',

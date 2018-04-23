@@ -14,6 +14,7 @@
     <script src="../plugins/easyui/jquery.easyui.min.js"></script>
     <script src="../plugins/layer/layer.js"></script>
     <script src="../plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="../plugins/bootstrap/bootstrap-suggest.js"></script>
     <script src="../plugins/vue/vue.min.js"></script>
     <script src="../plugins/validator/validator.min.js"></script>
     <script src="../plugins/jqgrid/grid.locale-cn.js"></script>
@@ -28,7 +29,7 @@
         <div class="grid-btn">
             <div class="col-sm-5" >
                 <div class="form-group">
-                    <select class="easyui-combobox" id="select"  style="width:150px" data-options="valueField:'id',textField:'text'" v-model="message" />
+                    <button id="searchSuggest" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></button>
                 </div>
             </div>
 
