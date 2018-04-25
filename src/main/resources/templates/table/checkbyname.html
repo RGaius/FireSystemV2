@@ -27,14 +27,12 @@
 <div id="app">
     <div v-show="list">
         <div class="grid-btn">
-            <div class="col-sm-5" >
-                <div class="form-group">
-                    <button id="searchSuggest" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></button>
-                </div>
+            <div class="form-group col-sm-4">
+                    <select class="easyui-combobox" id="select" data-options="valueField:'id', textField:'text', panelHeight:'auto'" ></select>
             </div>
 
             <div class="col-sm-1">
-                <a class="btn btn-success"><i class="fa fa-search">查询</i></a>
+                <a class="btn btn-success" id="query"><i class="fa fa-search">查询</i></a>
             </div>
 
             <div class="col-sm-1">

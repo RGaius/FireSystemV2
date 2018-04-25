@@ -1,39 +1,54 @@
 var param={}
 
-$("#searchSuggest").bsSuggest({
-    
-
-
-})
-/*$('#select').combobox({
+$('#select').combobox({
     prompt:"input",
     required:true,
     mode:'remote',
     type:"get",
     loader:function (q) {
+        $.each(q,function (key,values) {
+             param.countKeys=values;
+            }
+        )
+        param.startTime=null;
+        param.endTime=null;
         $.ajax({
             url:baseURL+"fire/unit/queryCount",
             type:"get",
             dataType:"json",
-            data:{
-                countKeys:JSON.stringify(q),
-                startTime:null,
-                endTime:null
-            },
+            data:param,
             success:function (rdata) {
-              console.log(rdata);
+              showOption(rdata.data);
             },
             error:function () {
                 console.log("error");
             }
-
-
         })
     }
-
     }
 )
-*/
+
+function showOption(rdata) {
+    var data=[];
+    $.each(rdata,function (i,val) {
+        data.push({"text":val.unitName,"id":val.unitId});
+    })
+    $("#select").combobox("loadData",data);
+    $("#query").click(function () {
+        query(rdata);
+    })
+}
+
+function query(rdata) {
+    var options=$("#select").combobox("getValue");
+    $.each(rdata,function (i,val) {
+        if(val.unitId==options){
+            var param=val;
+            console.log(param);
+        }
+    })
+}
+
 /*var vm=new Vue(
     {
         el:'#select1',
